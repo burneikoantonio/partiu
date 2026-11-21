@@ -139,7 +139,15 @@ def coletar_voos
   DEST.each do |d|
     id = d['id']
     v = voos[id]
-    gravar(File.join(DADOS, 'voos', "#{id}.json"), v.merge('atualizado' => AGORA.iso8601, 'cias' => cias[id] || {}))
+    # companhias: o que veio hoje + o que rodadas anteriores acharam para dias que ainda não passaram (até 7 dias atrás)
+    arq = File.join(DADOS, 'voos', "#{id}.json")
+    antigas = (ler(arq, {})['cias'] || {}).select do |k, x|
+      ida = k.split('|')[1].to_s
+      ida > HOJE.iso8601 && (x.is_a?(Array) || (x['em'].to_s >= (HOJE - 7).iso8601))
+    end
+    novas = (cias[id] || {}).map { |k, l| [k, { 'em' => HOJE.iso8601, 'l' => l }] }.to_h
+    antigas = antigas.map { |k, x| [k, x.is_a?(Array) ? { 'em' => HOJE.iso8601, 'l' => x } : x] }.to_h
+    gravar(arq, v.merge('atualizado' => AGORA.iso8601, 'cias' => antigas.merge(novas)))
     todos = v.flat_map { |k, cal| cal.map { |data, x| [x[0], data, k[1..-1].to_i, x] } }
     if todos.empty?
       resumo[id] = { 'semPreco' => true }
