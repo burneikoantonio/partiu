@@ -262,30 +262,37 @@ def google_voos(para, ida, volta)
 end
 
 def coletar_companhias(voos)
-  tarefas = []
+  # ordem de importância, para todos os destinos serem atendidos mesmo se o tempo acabar:
+  # 1º o dia mais barato da viagem de 7 dias; 2º o de 3 e 14 dias; 3º o mais barato de cada mês (7 dias)
+  niveis = [[], [], []]
   DEST.each do |d|
     v = voos[d['id']]
-    dias = []
     v.each do |k, cal|
       next if cal.empty?
       dur = k[1..-1].to_i
-      dias << [dur, cal.min_by { |_, x| x[0] }[0]]
+      niveis[dur == 7 ? 0 : 1] << [d, dur, cal.min_by { |_, x| x[0] }[0]]
       next unless dur == 7
-      cal.group_by { |dia, _| dia[0, 7] }.each_value { |l| dias << [7, l.min_by { |_, x| x[0] }[0]] }
+      cal.group_by { |dia, _| dia[0, 7] }.each_value { |l| niveis[2] << [d, 7, l.min_by { |_, x| x[0] }[0]] }
     end
-    dias = dias.uniq
-    dias = dias.first(2) if RAPIDO
-    dias.each { |dur, ida| tarefas << [d, dur, ida] }
   end
+  tarefas = niveis.flatten(1).uniq { |(d, dur, ida)| [d['id'], dur, ida] }
   tarefas = tarefas.first(12) if RAPIDO
   puts "Companhias: #{tarefas.size} buscas no Google Voos"
   saida = Hash.new { |h, k| h[k] = {} }
   trava = Mutex.new
   ok = falhas = 0
+  fim = Time.now + 600 # no máximo 10 minutos nesta parte
   em_paralelo(tarefas, 3) do |(d, dur, ida)|
-    next if falhas > 25 # o Google bloqueou: para de insistir
+    next if Time.now > fim
+    next if ok + falhas >= 60 && ok < (ok + falhas) * 0.1 # o Google bloqueou de vez: para de insistir
     volta = (Date.parse(ida) + dur).iso8601
-    l = google_voos(d['codigos'][0], ida, volta)
+    # às vezes a página vem "carregando", sem os voos: tenta de novo
+    l = nil
+    3.times do |i|
+      l = google_voos(d['codigos'][0], ida, volta)
+      break if l && !l.empty?
+      sleep 2 + i * 2
+    end
     trava.synchronize do
       if l && !l.empty?
         saida[d['id']]["#{dur}|#{ida}"] = l
