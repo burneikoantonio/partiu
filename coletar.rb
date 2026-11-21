@@ -149,9 +149,18 @@ def coletar_voos
     # menor preço de cada mês (viagens de 7 dias)
     meses = {}
     v['d7'].each { |dt, y| m = dt[0, 7]; meses[m] = y[0] if !meses[m] || y[0] < meses[m] }
+    # para cada tamanho de viagem: menor preço geral e de cada mês (o app mostra o mesmo número no card e na tela)
+    durs = {}
+    v.each do |k, cal|
+      next if cal.empty?
+      ms = {}
+      cal.each { |dt, y| m = dt[0, 7]; ms[m] = y[0] if !ms[m] || y[0] < ms[m] }
+      durs[k[1..-1]] = { 'min' => cal.values.map(&:first).min, 'meses' => ms }
+    end
     anterior = resumo[id] || {}
     resumo[id] = { 'min' => p, 'ida' => data, 'dias' => dur, 'orig' => x[1], 'paradas' => x[2], 'cia' => x[3],
-                   'mediana' => mediana, 'meses' => meses, 'antes' => anterior['min'] }
+                   'mediana' => mediana, 'meses' => meses, 'durs' => durs, 'antes' => anterior['min'],
+                   'antesDurs' => (anterior['durs'] || {}).map { |k, y| [k, y['min']] }.to_h }
     h = (hist[id] ||= [])
     h.reject! { |(dt, _)| dt == HOJE.iso8601 }
     h << [HOJE.iso8601, p]

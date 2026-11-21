@@ -315,7 +315,7 @@ function telaBuscar() {
       <div class="item" onclick="S.mala=!S.mala;salvar();telaBuscar()"><span>Mala despachada<small>soma uma mala de 23 kg por pessoa</small></span><span class="troca ${S.mala ? 'on' : ''}"></span></div>
     </div>
     <button class="btn" style="width:100%;margin-top:18px" onclick="buscar()">${I.lupa} Buscar passagens</button>
-    ${S.recentes.length ? `<h2>Buscas recentes</h2><div class="grupo">${S.recentes.filter(id => DEST.has(id)).map(id => { const x = DEST.get(id), r = RES[id] || {}; return `<button class="item" onclick="S.destino='${id}';salvar();abrir('${id}')"><span>${esc(x.nome)}<small>${esc(x.pais)}</small></span><span class="dir">${r.min ? 'a partir de ' + brl(r.min) : ''}</span></button>`; }).join('')}</div>` : ''}
+    ${S.recentes.length ? `<h2>Buscas recentes</h2><div class="grupo">${S.recentes.filter(id => DEST.has(id)).map(id => { const x = DEST.get(id), r = RES[id] || {}; return `<button class="item" onclick="S.destino='${id}';salvar();abrir('${id}')"><span>${esc(x.nome)}<small>${esc(x.pais)}</small></span><span class="dir">${S.modo === 'flex' && precoCard(id).p ? brl(precoCard(id).p) + `<small>${S.dur} dias</small>` : ''}</span></button>`; }).join('')}</div>` : ''}
   </div>`;
 }
 function proximosMeses(n) {
@@ -324,7 +324,7 @@ function proximosMeses(n) {
 }
 function mostrarSug(q) {
   const l = sugestoes(q);
-  document.getElementById('sug').innerHTML = l.length ? `<div class="sugestoes">${l.map(d => `<button class="item" onclick="escolher('${d.id}')"><span>${esc(d.nome)}<small>${esc(d.uf ? d.uf + ' · Brasil' : d.pais)}</small></span><span class="dir sub">${RES[d.id]?.min ? 'desde ' + brl(RES[d.id].min) : ''}</span></button>`).join('')}</div>`
+  document.getElementById('sug').innerHTML = l.length ? `<div class="sugestoes">${l.map(d => `<button class="item" onclick="escolher('${d.id}')"><span>${esc(d.nome)}<small>${esc(d.uf ? d.uf + ' · Brasil' : d.pais)}</small></span><span class="dir sub">${precoCard(d.id).p ? 'desde ' + brl(precoCard(d.id).p) : ''}</span></button>`).join('')}</div>`
     : q.trim() ? `<div class="sub" style="padding:8px 4px">Ainda não temos esse destino. Veja a lista na aba Destinos.</div>` : '';
 }
 function escolher(id) { S.destino = id; salvar(); document.getElementById('qDest').value = DEST.get(id).nome; document.getElementById('sug').innerHTML = ''; }
@@ -341,26 +341,37 @@ function telaDestinos() {
   const q = norm(S.filtro);
   let l = CFG.destinos.filter(d => (!S.regiao || d.regiao === S.regiao) && (!q || norm(d.nome + ' ' + d.pais).includes(q)));
   const ord = S.ordemDest || 'preco';
-  l = l.slice().sort(ord === 'preco' ? (a, b) => (RES[a.id]?.min || 1e9) - (RES[b.id]?.min || 1e9) : (a, b) => a.nome.localeCompare(b.nome));
+  l = l.slice().sort(ord === 'preco' ? (a, b) => (precoCard(a.id).p || 1e9) - (precoCard(b.id).p || 1e9) : (a, b) => a.nome.localeCompare(b.nome));
+  const dur = S.dur || 7;
   document.getElementById('app').innerHTML = `<div class="tela">
     <div class="linha"><h1>Destinos</h1><select class="ordem" onchange="S.ordemDest=this.value;salvar();telaDestinos()"><option value="preco" ${ord === 'preco' ? 'selected' : ''}>Menor preço</option><option value="nome" ${ord === 'nome' ? 'selected' : ''}>A a Z</option></select></div>
     <label class="busca">${I.lupa}<input type="search" placeholder="Filtrar destinos" value="${esc(S.filtro || '')}" oninput="S.filtro=this.value;clearTimeout(window._f);window._f=setTimeout(()=>{telaDestinos();const i=document.querySelector('.busca input');i.focus();i.setSelectionRange(99,99)},250)"></label>
     <div class="chips"><button class="chip ${!S.regiao ? 'on' : ''}" onclick="S.regiao='';salvar();telaDestinos()">Todos</button>${CFG.regioes.map(r => `<button class="chip ${S.regiao === r.id ? 'on' : ''}" onclick="S.regiao='${r.id}';salvar();telaDestinos()">${r.nome}</button>`).join('')}</div>
-    <div class="sub" style="margin-top:6px">Ida e volta por pessoa, o menor preço dos próximos meses${INFO.atualizado ? ' · ' + new Date(INFO.atualizado).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : ''}</div>
+    <div class="chips" style="padding-top:2px">${DURS.map(n => `<button class="chip ${dur === n ? 'on' : ''}" onclick="S.dur=${n};salvar();telaDestinos()">Viagem de ${n} dias</button>`).join('')}</div>
+    <div class="chips" style="padding-top:2px"><button class="chip ${!S.mes ? 'on' : ''}" onclick="S.mes='';salvar();telaDestinos()">Qualquer mês</button>${proximosMeses(6).map(m => `<button class="chip ${S.mes === m ? 'on' : ''}" onclick="S.mes='${m}';salvar();telaDestinos()">${MESES[+m.slice(5) - 1]}</button>`).join('')}</div>
+    <div class="sub" style="margin-top:6px">Ida e volta por pessoa, o dia mais barato ${S.mes ? 'de ' + MESES[+S.mes.slice(5) - 1] : 'dos próximos meses'}${INFO.atualizado ? ' · ' + new Date(INFO.atualizado).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : ''}</div>
     <div class="grade">${l.map(cartaoDestino).join('') || '<div class="vazio">Nada encontrado.</div>'}</div>
   </div>`;
 }
+// o preço do card é o mesmo que a tela do destino mostra ao abrir: viagem de S.dur dias, no mês escolhido (ou qualquer)
+function precoCard(id) {
+  const r = RES[id] || {}, dur = S.dur || 7;
+  const x = r.durs && r.durs[dur];
+  if (x) return { p: S.mes ? x.meses[S.mes] || null : x.min, antes: S.mes ? null : r.antesDurs?.[dur], dur };
+  return { p: S.mes ? (r.meses || {})[S.mes] || null : r.min, antes: null, dur: r.durs ? dur : r.dias }; // dados antigos
+}
+function abrirDestino(id) { S.destino = id; S.modo = 'flex'; S.sel = null; salvar(); abrir(id); }
 function cartaoDestino(d) {
-  const r = RES[d.id] || {};
-  const caiu = r.antes && r.min < r.antes * 0.95;
+  const c = precoCard(d.id);
+  const caiu = c.antes && c.p && c.p < c.antes * 0.95;
   const on = !!S.curtidas[d.id];
-  return `<div class="card" role="button" onclick="S.destino='${d.id}';salvar();abrir('${d.id}')">
+  return `<div class="card" role="button" onclick="abrirDestino('${d.id}')">
     <div class="foto">${capa(d) ? `<img loading="lazy" src="${esc(capa(d))}" alt="" onerror="this.remove()">` : ''}</div>
-    ${caiu ? `<span class="selo">baixou ${Math.round((1 - r.min / r.antes) * 100)}%</span>` : ''}
+    ${caiu ? `<span class="selo">baixou ${Math.round((1 - c.p / c.antes) * 100)}%</span>` : ''}
     <button class="coracao ${on ? 'on' : ''}" aria-label="Curtir" onclick="event.stopPropagation();curtir('${d.id}',this)">${on ? I.coracaoCheio : I.coracao}</button>
     <div class="nome">${esc(d.nome)}</div>
     <div class="loja">${esc(d.uf ? d.uf : d.pais)}</div>
-    <div class="preco">${r.min ? `<small>a partir de</small> ${brl(r.min)}` : '<small>sem preço agora</small>'}</div>
+    <div class="preco">${c.p ? `<small>a partir de</small> ${brl(c.p)}` : `<small>sem preço ${S.mes ? 'nesse mês' : 'agora'}</small>`}</div>
   </div>`;
 }
 
@@ -390,10 +401,11 @@ function telaCurtidas() {
   const linhaDest = id => {
     const d = DEST.get(id), r = RES[id] || {}, base = S.curtidas[id].base;
     const mudou = r.min && base && Math.abs(r.min - base) >= 10 ? (r.min < base ? `<small style="color:var(--verde)">baixou ${brl(base - r.min)}</small>` : `<small>subiu ${brl(r.min - base)}</small>`) : '';
-    return `<button class="item" onclick="abrir('${id}')"><span style="display:flex;gap:10px;align-items:center;min-width:0">
+    // abre exatamente na viagem do preço mostrado (o dia mais barato de todos)
+    return `<button class="item" onclick="${r.dias ? `S.dur=${r.dias};S.mes='';` : ''}abrirDestino('${id}')"><span style="display:flex;gap:10px;align-items:center;min-width:0">
       <span class="foto" style="width:52px;height:52px;flex:none;border-radius:9px;aspect-ratio:auto">${capa(d) ? `<img src="${esc(capa(d))}" alt="">` : ''}</span>
       <span style="min-width:0">${esc(d.nome)}<small>${esc(d.uf ? d.uf + ' · Brasil' : d.pais)}</small></span></span>
-      <span class="dir">${r.min ? brl(r.min) : '-'}${mudou}</span></button>`;
+      <span class="dir">${r.min ? brl(r.min) : '-'}${r.dias ? `<small>${r.dias} dias · ${dataCurta(r.ida)}</small>` : ''}${mudou}</span></button>`;
   };
   const linhaHosp = ([k, x]) => {
     const d = DEST.get(x.dest);
@@ -470,6 +482,42 @@ function escolherViagem(d, v) {
 }
 const volta = vg => somaDias(vg.ida, vg.dur);
 
+// a data escolhida tem um dia vizinho (até 3 dias antes ou depois) pelo menos R$ 100 mais barato por pessoa?
+const DIF_MIN = 100;
+function diaMelhor(d, vg) {
+  if (!vg.ida || vg.maisBarato) return null;
+  const dur = vg.durRef || vg.dur;
+  const cal = (VOOS.get(d.id) || {})['d' + dur] || {};
+  const atual = vg.x ? vg.x[0] : null;
+  let melhor = null;
+  for (let n = -3; n <= 3; n++) {
+    if (!n) continue;
+    const dia = somaDias(vg.ida, n);
+    if (dia <= iso(new Date())) continue;
+    const x = cal[dia];
+    if (x && (!melhor || x[0] < melhor.x[0])) melhor = { ida: dia, x, n };
+  }
+  if (!melhor || (atual && atual - melhor.x[0] < DIF_MIN)) return null;
+  return { ...melhor, economia: atual ? atual - melhor.x[0] : null, dur };
+}
+function avisoDiaMelhor(d, vg) {
+  const m = diaMelhor(d, vg);
+  if (!m) return '';
+  const n = S.pessoas;
+  const quando = `${m.n < 0 ? Math.abs(m.n) + (m.n === -1 ? ' dia antes' : ' dias antes') : m.n + (m.n === 1 ? ' dia depois' : ' dias depois')}`;
+  return `<div class="aviso" style="display:flex;gap:10px;align-items:center;justify-content:space-between">
+    <span>${m.economia ? `<b>Saindo ${SEMANA[dt(m.ida).getDay()]}, ${dataCurta(m.ida)} (${quando}) fica ${brl(m.economia)} mais barato</b> por pessoa${n > 1 ? `, ${brl(m.economia * n)} no total` : ''}.` : `<b>Sem preço para esse dia.</b> Saindo ${dataCurta(m.ida)} (${quando}) sai por ${brl(m.x[0])} por pessoa.`}</span>
+    <button class="btn" style="padding:9px 12px;font-size:14px;flex:none" onclick="trocarDia('${d.id}','${m.ida}',${m.dur})">Trocar</button></div>`;
+}
+function trocarDia(id, ida, dur) {
+  if (S.modo === 'exato' && !(S.sel && S.sel.dest === id)) {
+    // mantém o mesmo número de noites, só muda o dia
+    const noites = difDias(S.ida, S.volta);
+    S.ida = ida; S.volta = somaDias(ida, noites);
+  } else S.sel = { dest: id, ida, dur };
+  salvar(); toast('Data trocada para ' + dataCurta(ida)); telaDestino(id, null, true);
+}
+
 function resumoViagem(d, vg) {
   if (!vg.x && !vg.exato) return `<div class="aviso neutro" style="margin-top:12px">Sem preço de passagem para este destino agora. O robô tenta de novo na próxima atualização.</div>`;
   const n = S.pessoas;
@@ -487,7 +535,7 @@ function resumoViagem(d, vg) {
     ${h ? `<div class="lin"><span>Hospedagem<small class="sub" style="display:block">${h.fonte === 'hotel' ? 'hotel' : 'Airbnb'} com melhor custo-benefício</small></span><b style="white-space:nowrap">${brl(hospTotal)}</b></div>` : ''}
     <div class="lin soma"><span>Total estimado</span><span>${pass ? brl(pass + mala + (hospTotal || 0)) : '-'}</span></div>
     <div class="sub" style="margin-top:4px">${pass ? `${brl((pass + mala + (hospTotal || 0)) / n)} por pessoa` : ''}</div>
-  </div>`;
+  </div>${avisoDiaMelhor(d, vg)}`;
 }
 
 function parteVoos(d, v, vg) {
@@ -503,7 +551,7 @@ function parteVoos(d, v, vg) {
   if (vg.ida) {
     const kayak = `https://www.kayak.com.br/flights/SAO-${d.codigos[0]}/${vg.ida}/${volta(vg)}/${n}adults?sort=price_a`;
     const google = `https://www.google.com/travel/flights?hl=pt-BR&curr=BRL&q=${encodeURIComponent(`voos de São Paulo para ${d.nome.split(' e ')[0]} ida ${vg.ida} volta ${volta(vg)} ${n} adultos`)}`;
-    det = `<div class="grupo" style="margin-top:12px">
+    det = `${avisoDiaMelhor(d, vg)}<div class="grupo" style="margin-top:12px">
       <div class="item"><span><b>${dataCurta(vg.ida)} → ${dataCurta(volta(vg))}</b><small>${SEMANA[dt(vg.ida).getDay()]} a ${SEMANA[dt(volta(vg)).getDay()]} · ${vg.dur} noites</small></span><span class="dir">${x ? `<b style="font-size:18px">${brl(x[0])}</b><small>por pessoa, ida e volta</small>` : '<small>sem preço</small>'}</span></div>
       ${x ? `<div class="item"><span>Sai de<small>São Paulo</small></span><span class="dir">${esc(AEROPORTO[x[1]] || x[1])} (${esc(x[1])})</span></div>
       <div class="item"><span>Companhia</span><span class="dir">${esc(x[3])}</span></div>
@@ -749,6 +797,6 @@ async function ativarPush() {
   }
 })();
 </script>
-<script src="juntos.js?v=1795295660"></script>
+<script src="juntos.js?v=1795296234"></script>
 </body>
 </html>
