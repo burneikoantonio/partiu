@@ -131,13 +131,15 @@ def coletar_voos
   puts "\n  #{ok} buscas deram certo"
   raise 'Kayak não respondeu: nada foi salvo' if ok < tarefas.size * 0.3
 
+  DEST.each { |d| voos[d['id']].each_value { |cal| cal.replace(cal.sort.to_h) } }
+  cias = coletar_companhias(voos)
+
   resumo = ler(File.join(DADOS, 'resumo.json'), {})
   hist = ler(File.join(DADOS, 'historico.json'), {})
   DEST.each do |d|
     id = d['id']
     v = voos[id]
-    v.each_value { |cal| cal.replace(cal.sort.to_h) }
-    gravar(File.join(DADOS, 'voos', "#{id}.json"), v.merge('atualizado' => AGORA.iso8601))
+    gravar(File.join(DADOS, 'voos', "#{id}.json"), v.merge('atualizado' => AGORA.iso8601, 'cias' => cias[id] || {}))
     todos = v.flat_map { |k, cal| cal.map { |data, x| [x[0], data, k[1..-1].to_i, x] } }
     if todos.empty?
       resumo[id] = { 'semPreco' => true }
@@ -168,6 +170,103 @@ def coletar_voos
   end
   gravar(File.join(DADOS, 'resumo.json'), resumo)
   gravar(File.join(DADOS, 'historico.json'), hist)
+end
+
+# ---------------------------------------------------------------- companhias aéreas (Google Voos)
+# O Kayak dá só a companhia mais barata de cada dia. Para os dias que o app mais mostra (o mais barato de cada
+# tamanho de viagem e de cada mês), o robô busca no Google Voos o preço de cada companhia: LATAM, GOL, Azul, TAP...
+
+def varint(n)
+  b = ''.b
+  loop do
+    x = n & 0x7f
+    n >>= 7
+    b << (n > 0 ? (x | 0x80) : x).chr
+    break if n.zero?
+  end
+  b
+end
+
+def pb(num, v)
+  return varint(num << 3) + varint(v) if v.is_a?(Integer)
+  v = v.b
+  varint((num << 3) | 2) + varint(v.bytesize) + v
+end
+
+# endereço de busca do Google Voos (parâmetro "tfs"): ida e volta, classe econômica
+def google_voos_tfs(de, para, ida, volta, adultos = 1)
+  trecho = ->(dia, a, b) { pb(2, dia) + pb(13, pb(2, a)) + pb(14, pb(2, b)) }
+  m = pb(3, trecho.(ida, de, para)) + pb(3, trecho.(volta, para, de))
+  adultos.times { m << pb(8, 1) }
+  m << pb(9, 1) << pb(19, 1)
+  [m].pack('m0').tr('+/', '-_').delete('=')
+end
+
+AEROPORTO_SP = { 'Guarulhos' => 'GRU', 'Congonhas' => 'CGH', 'Viracopos' => 'VCP' }.freeze
+
+def google_voos(para, ida, volta)
+  url = "https://www.google.com/travel/flights/search?tfs=#{google_voos_tfs('SAO', para, ida, volta)}&hl=pt-BR&gl=br&curr=BRL"
+  html = baixar(url, tentativas: 2)
+  return nil unless html
+  voos = html.scan(/aria-label="(Preço total a partir de [^"]+)"/).flatten.map do |l|
+    l = CGI.unescapeHTML(l)
+    cia = l[/Voos? (?:direto )?da (.+?)(?: com | sem |\.)/, 1]
+    next unless cia
+    saida = l[/Sai do aeroporto (.+?) às/, 1].to_s
+    {
+      'c' => cia,
+      'p' => l[/a partir de ([\d\.]+) Reais/, 1].to_s.delete('.').to_i,
+      's' => l =~ /sem escalas|Voos? direto/i ? 0 : l[/com (\d+) parada/, 1].to_i,
+      'o' => (AEROPORTO_SP.find { |k, _| saida.include?(k) } || [])[1],
+      'h' => l[/às (\d{1,2}:\d{2})/, 1],
+      'd' => l[/Duração total: ([^.]+)\./, 1]
+    }.reject { |_, v| v.nil? }
+  end.compact.select { |v| v['p'] > 0 }
+  # por companhia: o voo mais barato e, se ele tiver parada, também o direto mais barato
+  voos.group_by { |v| v['c'] }.map do |_, l|
+    melhor = l.min_by { |v| v['p'] }
+    direto = l.select { |v| v['s'].zero? }.min_by { |v| v['p'] }
+    melhor = melhor.merge('pd' => direto['p']) if direto && melhor['s'] > 0
+    melhor
+  end.sort_by { |v| v['p'] }.first(8)
+end
+
+def coletar_companhias(voos)
+  tarefas = []
+  DEST.each do |d|
+    v = voos[d['id']]
+    dias = []
+    v.each do |k, cal|
+      next if cal.empty?
+      dur = k[1..-1].to_i
+      dias << [dur, cal.min_by { |_, x| x[0] }[0]]
+      next unless dur == 7
+      cal.group_by { |dia, _| dia[0, 7] }.each_value { |l| dias << [7, l.min_by { |_, x| x[0] }[0]] }
+    end
+    dias = dias.uniq
+    dias = dias.first(2) if RAPIDO
+    dias.each { |dur, ida| tarefas << [d, dur, ida] }
+  end
+  tarefas = tarefas.first(12) if RAPIDO
+  puts "Companhias: #{tarefas.size} buscas no Google Voos"
+  saida = Hash.new { |h, k| h[k] = {} }
+  trava = Mutex.new
+  ok = falhas = 0
+  em_paralelo(tarefas, 3) do |(d, dur, ida)|
+    next if falhas > 25 # o Google bloqueou: para de insistir
+    volta = (Date.parse(ida) + dur).iso8601
+    l = google_voos(d['codigos'][0], ida, volta)
+    trava.synchronize do
+      if l && !l.empty?
+        saida[d['id']]["#{dur}|#{ida}"] = l
+        ok += 1
+      else
+        falhas += 1
+      end
+    end
+  end
+  puts "  #{ok} deram certo, #{falhas} sem resposta"
+  saida
 end
 
 # ---------------------------------------------------------------- hospedagem

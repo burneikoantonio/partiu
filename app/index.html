@@ -482,6 +482,19 @@ function escolherViagem(d, v) {
 }
 const volta = vg => somaDias(vg.ida, vg.dur);
 
+// link do Google Voos já com a busca pronta (ida e volta saindo de São Paulo, datas e pessoas): parâmetro "tfs"
+function linkGoogleVoos(para, ida, volta, adultos) {
+  const vi = n => { const b = []; do { let x = n & 127; n >>>= 7; b.push(n ? x | 128 : x); } while (n); return b; };
+  const txt = s => [...new TextEncoder().encode(s)];
+  const campo = (num, v) => typeof v === 'number' ? [...vi(num << 3), ...vi(v)] : [...vi((num << 3) | 2), ...vi(v.length), ...v];
+  const trecho = (dia, a, b) => [...campo(2, txt(dia)), ...campo(13, campo(2, txt(a))), ...campo(14, campo(2, txt(b)))];
+  let m = [...campo(3, trecho(ida, 'SAO', para)), ...campo(3, trecho(volta, para, 'SAO'))];
+  for (let i = 0; i < adultos; i++) m.push(...campo(8, 1));
+  m.push(...campo(9, 1), ...campo(19, 1));
+  const tfs = btoa(String.fromCharCode(...m)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  return `https://www.google.com/travel/flights/search?tfs=${tfs}&hl=pt-BR&gl=br&curr=BRL`;
+}
+
 // a data escolhida tem um dia vizinho (até 3 dias antes ou depois) pelo menos R$ 100 mais barato por pessoa?
 const DIF_MIN = 100;
 function diaMelhor(d, vg) {
@@ -550,7 +563,8 @@ function parteVoos(d, v, vg) {
   let det = '';
   if (vg.ida) {
     const kayak = `https://www.kayak.com.br/flights/SAO-${d.codigos[0]}/${vg.ida}/${volta(vg)}/${n}adults?sort=price_a`;
-    const google = `https://www.google.com/travel/flights?hl=pt-BR&curr=BRL&q=${encodeURIComponent(`voos de São Paulo para ${d.nome.split(' e ')[0]} ida ${vg.ida} volta ${volta(vg)} ${n} adultos`)}`;
+    const google = linkGoogleVoos(d.codigos[0], vg.ida, volta(vg), n);
+    const cias = (v.cias || {})[`${vg.dur}|${vg.ida}`];
     det = `${avisoDiaMelhor(d, vg)}<div class="grupo" style="margin-top:12px">
       <div class="item"><span><b>${dataCurta(vg.ida)} → ${dataCurta(volta(vg))}</b><small>${SEMANA[dt(vg.ida).getDay()]} a ${SEMANA[dt(volta(vg)).getDay()]} · ${vg.dur} noites</small></span><span class="dir">${x ? `<b style="font-size:18px">${brl(x[0])}</b><small>por pessoa, ida e volta</small>` : '<small>sem preço</small>'}</span></div>
       ${x ? `<div class="item"><span>Sai de<small>São Paulo</small></span><span class="dir">${esc(AEROPORTO[x[1]] || x[1])} (${esc(x[1])})</span></div>
@@ -561,6 +575,12 @@ function parteVoos(d, v, vg) {
     </div>
     ${vg.exato && vg.durRef !== vg.dur ? `<div class="aviso neutro">Para ${vg.dur} noites o preço exato aparece no site. Acima está o preço de uma viagem de ${vg.durRef} dias saindo no mesmo dia, como referência.</div>` : ''}
     ${vg.exato && !x ? `<div class="aviso neutro">Sem preço guardado para esse dia. Toque num dia do calendário ou confira no site.</div>` : ''}
+    <h2>Companhias aéreas</h2>
+    ${cias ? `<div class="sub" style="margin:-4px 0 6px">Neste dia, ida e volta por pessoa, pelo Google Voos. Toque para ver os voos.</div><div class="grupo">${cias.map((c, i) => `
+      <a class="item ${i === 0 ? 'barato' : ''}" href="${esc(google)}" target="_blank" rel="noopener" style="color:inherit">
+        <span><b>${esc(c.c)}</b><small>${c.s === 0 ? 'Direto' : c.s + (c.s > 1 ? ' paradas' : ' parada')}${c.d ? ' · ' + esc(c.d) : ''}${c.o ? ' · sai de ' + esc(AEROPORTO[c.o] || c.o) : ''}${c.h ? ' às ' + esc(c.h) : ''}</small></span>
+        <span class="dir">${brl(c.p)}${n > 1 ? `<small>${brl(c.p * n)} para ${n}</small>` : ''}${c.pd ? `<small>direto: ${brl(c.pd)}</small>` : ''}</span></a>`).join('')}</div>`
+      : `<div class="texto" style="font-size:14px">O comparativo de companhias (LATAM, GOL, Azul e outras) fica pronto para o dia mais barato de cada mês. Para este dia, <a href="${esc(google)}" target="_blank" rel="noopener">veja todas as companhias no Google Voos</a>.</div>`}
     <div class="acoes"><a class="btn cheio" href="${esc(kayak)}" target="_blank" rel="noopener">Ver no Kayak</a><a class="btn fraco cheio" href="${esc(google)}" target="_blank" rel="noopener">Google Voos</a></div>
     <div class="acoes" style="margin-top:8px"><button class="btn fraco cheio" onclick="criarAviso('${d.id}')">${I.sino} ${S.alertas[d.id] ? 'Aviso ligado' : 'Avisar se baixar'}</button><button class="btn fraco cheio" onclick="recomendar('${d.id}')">${I.juntos} Mandar pro grupo</button></div>`;
   }
@@ -797,6 +817,6 @@ async function ativarPush() {
   }
 })();
 </script>
-<script src="juntos.js?v=1795296234"></script>
+<script src="juntos.js?v=1795296955"></script>
 </body>
 </html>
