@@ -1,0 +1,3919 @@
+{
+  "regioes": [
+    {
+      "id": "brasil",
+      "nome": "Brasil"
+    },
+    {
+      "id": "sul",
+      "nome": "América do Sul"
+    },
+    {
+      "id": "norte",
+      "nome": "América do Norte e Caribe"
+    },
+    {
+      "id": "europa",
+      "nome": "Europa"
+    },
+    {
+      "id": "mundo",
+      "nome": "Ásia, África e Oceania"
+    }
+  ],
+  "destinos": [
+    {
+      "id": "rio",
+      "nome": "Rio de Janeiro",
+      "uf": "RJ",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "RIO",
+        "GIG",
+        "SDU"
+      ],
+      "airbnb": "Rio-de-Janeiro--RJ",
+      "capa": "Pão de Açúcar",
+      "lugares": [
+        [
+          "Cristo Redentor",
+          "monumento"
+        ],
+        [
+          "Pão de Açúcar",
+          "natureza"
+        ],
+        [
+          "Praia de Copacabana",
+          "praia"
+        ],
+        [
+          "Praia de Ipanema",
+          "praia"
+        ],
+        [
+          "Escadaria Selarón",
+          "passeio"
+        ],
+        [
+          "Jardim Botânico do Rio de Janeiro",
+          "natureza"
+        ],
+        [
+          "Museu do Amanhã",
+          "museu"
+        ],
+        [
+          "Arcos da Lapa",
+          "monumento"
+        ],
+        [
+          "Parque Nacional da Tijuca",
+          "natureza"
+        ],
+        [
+          "Estádio do Maracanã",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "salvador",
+      "nome": "Salvador",
+      "uf": "BA",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "SSA"
+      ],
+      "airbnb": "Salvador--BA",
+      "capa": "Elevador Lacerda",
+      "lugares": [
+        [
+          "Pelourinho",
+          "bairro"
+        ],
+        [
+          "Elevador Lacerda",
+          "monumento"
+        ],
+        [
+          "Farol da Barra",
+          "monumento"
+        ],
+        [
+          "Igreja e Convento de São Francisco (Salvador)",
+          "monumento"
+        ],
+        [
+          "Mercado Modelo",
+          "passeio"
+        ],
+        [
+          "Igreja do Senhor do Bonfim",
+          "monumento"
+        ],
+        [
+          "Praia do Porto da Barra",
+          "praia"
+        ],
+        [
+          "Praia do Forte",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "recife",
+      "nome": "Recife e Porto de Galinhas",
+      "uf": "PE",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "REC"
+      ],
+      "airbnb": "Porto-de-Galinhas--Ipojuca--PE",
+      "capa": "Porto de Galinhas",
+      "lugares": [
+        [
+          "Porto de Galinhas",
+          "praia"
+        ],
+        [
+          "Olinda",
+          "bairro"
+        ],
+        [
+          "Praia de Boa Viagem",
+          "praia"
+        ],
+        [
+          "Recife Antigo",
+          "bairro"
+        ],
+        [
+          "Instituto Ricardo Brennand",
+          "museu"
+        ],
+        [
+          "Oficina Cerâmica Francisco Brennand",
+          "museu"
+        ],
+        [
+          "Praia dos Carneiros",
+          "praia"
+        ],
+        [
+          "Paço do Frevo",
+          "museu"
+        ]
+      ]
+    },
+    {
+      "id": "fortaleza",
+      "nome": "Fortaleza",
+      "uf": "CE",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "FOR"
+      ],
+      "airbnb": "Fortaleza--CE",
+      "capa": "Praia de Iracema",
+      "lugares": [
+        [
+          "Praia do Futuro",
+          "praia"
+        ],
+        [
+          "Praia de Iracema",
+          "praia"
+        ],
+        [
+          "Beach Park",
+          "passeio"
+        ],
+        [
+          "Centro Dragão do Mar de Arte e Cultura",
+          "museu"
+        ],
+        [
+          "Mercado Central de Fortaleza",
+          "passeio"
+        ],
+        [
+          "Canoa Quebrada",
+          "praia"
+        ],
+        [
+          "Cumbuco",
+          "praia"
+        ],
+        [
+          "Theatro José de Alencar",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "natal",
+      "nome": "Natal",
+      "uf": "RN",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "NAT"
+      ],
+      "airbnb": "Natal--RN",
+      "capa": "Ponta Negra (Natal)",
+      "lugares": [
+        [
+          "Ponta Negra (Natal)",
+          "praia"
+        ],
+        [
+          "Dunas de Genipabu",
+          "natureza"
+        ],
+        [
+          "Praia da Pipa",
+          "praia"
+        ],
+        [
+          "Forte dos Reis Magos",
+          "monumento"
+        ],
+        [
+          "Cajueiro de Pirangi",
+          "natureza"
+        ],
+        [
+          "Parque das Dunas",
+          "natureza"
+        ],
+        [
+          "Maracajaú",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "maceio",
+      "nome": "Maceió",
+      "uf": "AL",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "MCZ"
+      ],
+      "airbnb": "Maceio--AL",
+      "capa": "Praia de Pajuçara",
+      "lugares": [
+        [
+          "Praia de Pajuçara",
+          "praia"
+        ],
+        [
+          "Praia do Francês",
+          "praia"
+        ],
+        [
+          "Maragogi",
+          "praia"
+        ],
+        [
+          "São Miguel dos Milagres",
+          "praia"
+        ],
+        [
+          "Praia do Gunga",
+          "praia"
+        ],
+        [
+          "Ponta Verde",
+          "praia"
+        ],
+        [
+          "Lagoa Mundaú",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "joaopessoa",
+      "nome": "João Pessoa",
+      "uf": "PB",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "JPA"
+      ],
+      "airbnb": "Joao-Pessoa--PB",
+      "capa": "Ponta do Seixas",
+      "lugares": [
+        [
+          "Ponta do Seixas",
+          "natureza"
+        ],
+        [
+          "Praia de Tambaú",
+          "praia"
+        ],
+        [
+          "Praia do Jacaré",
+          "passeio"
+        ],
+        [
+          "Picãozinho",
+          "natureza"
+        ],
+        [
+          "Centro Histórico de João Pessoa",
+          "bairro"
+        ],
+        [
+          "Praia de Coqueirinho",
+          "praia"
+        ],
+        [
+          "Igreja de São Francisco (João Pessoa)",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "portoseguro",
+      "nome": "Porto Seguro e Trancoso",
+      "uf": "BA",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "BPS"
+      ],
+      "airbnb": "Trancoso--Porto-Seguro--BA",
+      "capa": "Trancoso",
+      "lugares": [
+        [
+          "Trancoso",
+          "bairro"
+        ],
+        [
+          "Arraial d'Ajuda",
+          "bairro"
+        ],
+        [
+          "Caraíva",
+          "praia"
+        ],
+        [
+          "Cidade Histórica de Porto Seguro",
+          "bairro"
+        ],
+        [
+          "Praia do Espelho",
+          "praia"
+        ],
+        [
+          "Recife de Fora",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "florianopolis",
+      "nome": "Florianópolis",
+      "uf": "SC",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "FLN"
+      ],
+      "airbnb": "Florianopolis--SC",
+      "capa": "Ponte Hercílio Luz",
+      "lugares": [
+        [
+          "Ponte Hercílio Luz",
+          "monumento"
+        ],
+        [
+          "Lagoa da Conceição",
+          "natureza"
+        ],
+        [
+          "Praia da Joaquina",
+          "praia"
+        ],
+        [
+          "Praia do Campeche",
+          "praia"
+        ],
+        [
+          "Jurerê Internacional",
+          "praia"
+        ],
+        [
+          "Santo Antônio de Lisboa",
+          "bairro"
+        ],
+        [
+          "Ribeirão da Ilha",
+          "bairro"
+        ],
+        [
+          "Praia Mole",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "foz",
+      "nome": "Foz do Iguaçu",
+      "uf": "PR",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "IGU",
+        "IGR"
+      ],
+      "airbnb": "Foz-do-Iguacu--PR",
+      "capa": "Cataratas do Iguaçu",
+      "lugares": [
+        [
+          "Cataratas do Iguaçu",
+          "natureza"
+        ],
+        [
+          "Usina Hidrelétrica de Itaipu",
+          "passeio"
+        ],
+        [
+          "Parque das Aves",
+          "natureza"
+        ],
+        [
+          "Marco das Três Fronteiras",
+          "monumento"
+        ],
+        [
+          "Templo Budista de Foz do Iguaçu",
+          "monumento"
+        ],
+        [
+          "Garganta do Diabo (Iguaçu)",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "noronha",
+      "nome": "Fernando de Noronha",
+      "uf": "PE",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "FEN"
+      ],
+      "airbnb": "Fernando-de-Noronha--PE",
+      "capa": "Baía do Sancho",
+      "lugares": [
+        [
+          "Baía do Sancho",
+          "praia"
+        ],
+        [
+          "Baía dos Porcos",
+          "praia"
+        ],
+        [
+          "Morro Dois Irmãos",
+          "natureza"
+        ],
+        [
+          "Praia do Leão",
+          "praia"
+        ],
+        [
+          "Baía dos Golfinhos",
+          "natureza"
+        ],
+        [
+          "Praia do Atalaia (Fernando de Noronha)",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "gramado",
+      "nome": "Gramado e Canela",
+      "uf": "RS",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "POA",
+        "CXJ"
+      ],
+      "obs": "voo até Porto Alegre ou Caxias do Sul",
+      "airbnb": "Gramado--RS",
+      "capa": "Gramado",
+      "lugares": [
+        [
+          "Lago Negro",
+          "natureza"
+        ],
+        [
+          "Rua Coberta",
+          "passeio"
+        ],
+        [
+          "Cascata do Caracol",
+          "natureza"
+        ],
+        [
+          "Catedral de Pedra",
+          "monumento"
+        ],
+        [
+          "Mini Mundo",
+          "passeio"
+        ],
+        [
+          "Snowland",
+          "passeio"
+        ],
+        [
+          "Parque do Caracol",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "portoalegre",
+      "nome": "Porto Alegre",
+      "uf": "RS",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "POA"
+      ],
+      "airbnb": "Porto-Alegre--RS",
+      "capa": "Usina do Gasômetro",
+      "lugares": [
+        [
+          "Usina do Gasômetro",
+          "passeio"
+        ],
+        [
+          "Mercado Público de Porto Alegre",
+          "passeio"
+        ],
+        [
+          "Parque Farroupilha",
+          "natureza"
+        ],
+        [
+          "Fundação Iberê Camargo",
+          "museu"
+        ],
+        [
+          "Casa de Cultura Mario Quintana",
+          "museu"
+        ],
+        [
+          "Orla do Guaíba",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "curitiba",
+      "nome": "Curitiba",
+      "uf": "PR",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "CWB"
+      ],
+      "airbnb": "Curitiba--PR",
+      "capa": "Jardim Botânico de Curitiba",
+      "lugares": [
+        [
+          "Jardim Botânico de Curitiba",
+          "natureza"
+        ],
+        [
+          "Museu Oscar Niemeyer",
+          "museu"
+        ],
+        [
+          "Ópera de Arame",
+          "monumento"
+        ],
+        [
+          "Parque Tanguá",
+          "natureza"
+        ],
+        [
+          "Largo da Ordem",
+          "bairro"
+        ],
+        [
+          "Santa Felicidade",
+          "bairro"
+        ],
+        [
+          "Serra do Mar Paranaense",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "bh",
+      "nome": "Belo Horizonte e Ouro Preto",
+      "uf": "MG",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "BHZ",
+        "CNF"
+      ],
+      "airbnb": "Belo-Horizonte--MG",
+      "capa": "Igreja de São Francisco de Assis (Belo Horizonte)",
+      "lugares": [
+        [
+          "Instituto Inhotim",
+          "museu"
+        ],
+        [
+          "Igreja de São Francisco de Assis (Belo Horizonte)",
+          "monumento"
+        ],
+        [
+          "Mercado Central de Belo Horizonte",
+          "passeio"
+        ],
+        [
+          "Praça da Liberdade (Belo Horizonte)",
+          "passeio"
+        ],
+        [
+          "Ouro Preto",
+          "bairro"
+        ],
+        [
+          "Mirante do Mangabeiras",
+          "natureza"
+        ],
+        [
+          "Lagoa da Pampulha",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "brasilia",
+      "nome": "Brasília",
+      "uf": "DF",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "BSB"
+      ],
+      "airbnb": "Brasilia--DF",
+      "capa": "Catedral Metropolitana de Brasília",
+      "lugares": [
+        [
+          "Congresso Nacional do Brasil",
+          "monumento"
+        ],
+        [
+          "Catedral Metropolitana de Brasília",
+          "monumento"
+        ],
+        [
+          "Palácio do Itamaraty",
+          "monumento"
+        ],
+        [
+          "Ponte Juscelino Kubitschek",
+          "monumento"
+        ],
+        [
+          "Torre de TV de Brasília",
+          "passeio"
+        ],
+        [
+          "Santuário Dom Bosco",
+          "monumento"
+        ],
+        [
+          "Parque da Cidade Dona Sarah Kubitschek",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "manaus",
+      "nome": "Manaus",
+      "uf": "AM",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "MAO"
+      ],
+      "airbnb": "Manaus--AM",
+      "capa": "Teatro Amazonas",
+      "lugares": [
+        [
+          "Teatro Amazonas",
+          "monumento"
+        ],
+        [
+          "Encontro das Águas",
+          "natureza"
+        ],
+        [
+          "Mercado Municipal Adolpho Lisboa",
+          "passeio"
+        ],
+        [
+          "Praia da Ponta Negra (Manaus)",
+          "praia"
+        ],
+        [
+          "Museu da Amazônia",
+          "museu"
+        ],
+        [
+          "Arquipélago de Anavilhanas",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "belem",
+      "nome": "Belém",
+      "uf": "PA",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "BEL"
+      ],
+      "airbnb": "Belem--PA",
+      "capa": "Mercado Ver-o-Peso",
+      "lugares": [
+        [
+          "Mercado Ver-o-Peso",
+          "passeio"
+        ],
+        [
+          "Estação das Docas",
+          "passeio"
+        ],
+        [
+          "Theatro da Paz",
+          "monumento"
+        ],
+        [
+          "Mangal das Garças",
+          "natureza"
+        ],
+        [
+          "Basílica de Nossa Senhora de Nazaré",
+          "monumento"
+        ],
+        [
+          "Ilha do Combu",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "saoluis",
+      "nome": "São Luís e Lençóis Maranhenses",
+      "uf": "MA",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "SLZ"
+      ],
+      "airbnb": "Barreirinhas--MA",
+      "capa": "Parque Nacional dos Lençóis Maranhenses",
+      "lugares": [
+        [
+          "Parque Nacional dos Lençóis Maranhenses",
+          "natureza"
+        ],
+        [
+          "Centro Histórico de São Luís",
+          "bairro"
+        ],
+        [
+          "Lagoa Azul (Lençóis Maranhenses)",
+          "natureza"
+        ],
+        [
+          "Barreirinhas",
+          "bairro"
+        ],
+        [
+          "Atins",
+          "praia"
+        ],
+        [
+          "Palácio dos Leões",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "jeri",
+      "nome": "Jericoacoara",
+      "uf": "CE",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "JJD"
+      ],
+      "obs": "aeroporto de Jericoacoara (Cruz)",
+      "airbnb": "Jijoca-de-Jericoacoara--CE",
+      "capa": "Parque Nacional de Jericoacoara",
+      "lugares": [
+        [
+          "Duna do Pôr do Sol",
+          "natureza"
+        ],
+        [
+          "Pedra Furada (Jericoacoara)",
+          "natureza"
+        ],
+        [
+          "Lagoa do Paraíso",
+          "natureza"
+        ],
+        [
+          "Lagoa Azul (Jijoca de Jericoacoara)",
+          "natureza"
+        ],
+        [
+          "Parque Nacional de Jericoacoara",
+          "natureza"
+        ],
+        [
+          "Praia do Preá",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "bonito",
+      "nome": "Bonito",
+      "uf": "MS",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "BYO"
+      ],
+      "airbnb": "Bonito--MS",
+      "capa": "Gruta do Lago Azul",
+      "lugares": [
+        [
+          "Gruta do Lago Azul",
+          "natureza"
+        ],
+        [
+          "Rio da Prata (Mato Grosso do Sul)",
+          "natureza"
+        ],
+        [
+          "Buraco das Araras",
+          "natureza"
+        ],
+        [
+          "Abismo Anhumas",
+          "natureza"
+        ],
+        [
+          "Rio Sucuri",
+          "natureza"
+        ],
+        [
+          "Balneário Municipal de Bonito",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "buenosaires",
+      "nome": "Buenos Aires",
+      "pais": "Argentina",
+      "regiao": "sul",
+      "codigos": [
+        "BUE",
+        "EZE",
+        "AEP"
+      ],
+      "airbnb": "Buenos-Aires--Argentina",
+      "capa": "Obelisco de Buenos Aires",
+      "lugares": [
+        [
+          "Caminito",
+          "bairro"
+        ],
+        [
+          "Teatro Colón",
+          "monumento"
+        ],
+        [
+          "Obelisco de Buenos Aires",
+          "monumento"
+        ],
+        [
+          "Cemitério da Recoleta",
+          "monumento"
+        ],
+        [
+          "Puerto Madero",
+          "bairro"
+        ],
+        [
+          "Casa Rosada",
+          "monumento"
+        ],
+        [
+          "San Telmo (Buenos Aires)",
+          "bairro"
+        ],
+        [
+          "El Ateneo Grand Splendid",
+          "passeio"
+        ],
+        [
+          "Palermo (Buenos Aires)",
+          "bairro"
+        ]
+      ]
+    },
+    {
+      "id": "santiago",
+      "nome": "Santiago",
+      "pais": "Chile",
+      "regiao": "sul",
+      "codigos": [
+        "SCL"
+      ],
+      "airbnb": "Santiago--Chile",
+      "capa": "Cerro San Cristóbal",
+      "lugares": [
+        [
+          "Cerro San Cristóbal",
+          "natureza"
+        ],
+        [
+          "Valle Nevado",
+          "natureza"
+        ],
+        [
+          "Cerro Santa Lucía",
+          "passeio"
+        ],
+        [
+          "La Moneda",
+          "monumento"
+        ],
+        [
+          "Viña Concha y Toro",
+          "passeio"
+        ],
+        [
+          "Sky Costanera",
+          "passeio"
+        ],
+        [
+          "Valparaíso",
+          "bairro"
+        ],
+        [
+          "Bairro Bellavista",
+          "bairro"
+        ]
+      ]
+    },
+    {
+      "id": "montevideu",
+      "nome": "Montevidéu e Punta del Este",
+      "pais": "Uruguai",
+      "regiao": "sul",
+      "codigos": [
+        "MVD",
+        "PDP"
+      ],
+      "airbnb": "Montevideo--Uruguay",
+      "capa": "Palácio Salvo",
+      "lugares": [
+        [
+          "Palácio Salvo",
+          "monumento"
+        ],
+        [
+          "Rambla de Montevidéu",
+          "passeio"
+        ],
+        [
+          "Mercado del Puerto",
+          "passeio"
+        ],
+        [
+          "Ciudad Vieja (Montevidéu)",
+          "bairro"
+        ],
+        [
+          "Punta del Este",
+          "praia"
+        ],
+        [
+          "Casapueblo",
+          "museu"
+        ],
+        [
+          "Colonia del Sacramento",
+          "bairro"
+        ]
+      ]
+    },
+    {
+      "id": "lima",
+      "nome": "Lima",
+      "pais": "Peru",
+      "regiao": "sul",
+      "codigos": [
+        "LIM"
+      ],
+      "airbnb": "Lima--Peru",
+      "capa": "Miraflores (Lima)",
+      "lugares": [
+        [
+          "Miraflores (Lima)",
+          "bairro"
+        ],
+        [
+          "Centro Histórico de Lima",
+          "bairro"
+        ],
+        [
+          "Barranco (Lima)",
+          "bairro"
+        ],
+        [
+          "Huaca Pucllana",
+          "monumento"
+        ],
+        [
+          "Museu Larco",
+          "museu"
+        ],
+        [
+          "Circuito Mágico del Agua",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "cusco",
+      "nome": "Cusco e Machu Picchu",
+      "pais": "Peru",
+      "regiao": "sul",
+      "codigos": [
+        "CUZ"
+      ],
+      "airbnb": "Cusco--Peru",
+      "capa": "Machu Picchu",
+      "lugares": [
+        [
+          "Machu Picchu",
+          "monumento"
+        ],
+        [
+          "Vale Sagrado dos Incas",
+          "natureza"
+        ],
+        [
+          "Sacsayhuamán",
+          "monumento"
+        ],
+        [
+          "Montanha Arco-Íris",
+          "natureza"
+        ],
+        [
+          "Plaza de Armas (Cusco)",
+          "passeio"
+        ],
+        [
+          "Coricancha",
+          "monumento"
+        ],
+        [
+          "Ollantaytambo",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "bariloche",
+      "nome": "Bariloche",
+      "pais": "Argentina",
+      "regiao": "sul",
+      "codigos": [
+        "BRC"
+      ],
+      "airbnb": "San-Carlos-de-Bariloche--Argentina",
+      "capa": "Lago Nahuel Huapi",
+      "lugares": [
+        [
+          "Cerro Catedral",
+          "natureza"
+        ],
+        [
+          "Cerro Campanario",
+          "natureza"
+        ],
+        [
+          "Lago Nahuel Huapi",
+          "natureza"
+        ],
+        [
+          "Circuito Chico",
+          "passeio"
+        ],
+        [
+          "Centro Cívico de Bariloche",
+          "monumento"
+        ],
+        [
+          "Isla Victoria",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "mendoza",
+      "nome": "Mendoza",
+      "pais": "Argentina",
+      "regiao": "sul",
+      "codigos": [
+        "MDZ"
+      ],
+      "airbnb": "Mendoza--Argentina",
+      "capa": "Aconcágua",
+      "lugares": [
+        [
+          "Vale do Uco",
+          "passeio"
+        ],
+        [
+          "Parque General San Martín",
+          "natureza"
+        ],
+        [
+          "Aconcágua",
+          "natureza"
+        ],
+        [
+          "Puente del Inca",
+          "natureza"
+        ],
+        [
+          "Luján de Cuyo",
+          "passeio"
+        ],
+        [
+          "Cerro de la Gloria",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "cartagena",
+      "nome": "Cartagena",
+      "pais": "Colômbia",
+      "regiao": "sul",
+      "codigos": [
+        "CTG"
+      ],
+      "airbnb": "Cartagena--Colombia",
+      "capa": "Cartagena das Índias",
+      "lugares": [
+        [
+          "Cidade Murada de Cartagena",
+          "bairro"
+        ],
+        [
+          "Castelo de San Felipe de Barajas",
+          "monumento"
+        ],
+        [
+          "Ilhas do Rosário",
+          "praia"
+        ],
+        [
+          "Getsemaní",
+          "bairro"
+        ],
+        [
+          "Playa Blanca (Colômbia)",
+          "praia"
+        ],
+        [
+          "Torre del Reloj (Cartagena)",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "medellin",
+      "nome": "Medellín",
+      "pais": "Colômbia",
+      "regiao": "sul",
+      "codigos": [
+        "MDE"
+      ],
+      "airbnb": "Medellin--Colombia",
+      "capa": "Medellín",
+      "lugares": [
+        [
+          "Comuna 13",
+          "bairro"
+        ],
+        [
+          "Guatapé",
+          "passeio"
+        ],
+        [
+          "Pedra de Guatapé",
+          "natureza"
+        ],
+        [
+          "Plaza Botero",
+          "monumento"
+        ],
+        [
+          "Parque Arví",
+          "natureza"
+        ],
+        [
+          "Museu de Antioquia",
+          "museu"
+        ]
+      ]
+    },
+    {
+      "id": "novayork",
+      "nome": "Nova York",
+      "pais": "Estados Unidos",
+      "regiao": "norte",
+      "codigos": [
+        "NYC",
+        "JFK",
+        "EWR",
+        "LGA"
+      ],
+      "airbnb": "New-York--NY--United-States",
+      "capa": "Times Square",
+      "lugares": [
+        [
+          "Times Square",
+          "passeio"
+        ],
+        [
+          "Central Park",
+          "natureza"
+        ],
+        [
+          "Estátua da Liberdade",
+          "monumento"
+        ],
+        [
+          "Empire State Building",
+          "monumento"
+        ],
+        [
+          "Museu Metropolitano de Arte",
+          "museu"
+        ],
+        [
+          "Ponte do Brooklyn",
+          "monumento"
+        ],
+        [
+          "High Line",
+          "passeio"
+        ],
+        [
+          "One World Trade Center",
+          "monumento"
+        ],
+        [
+          "Museu de Arte Moderna (Nova Iorque)",
+          "museu"
+        ],
+        [
+          "Rockefeller Center",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "miami",
+      "nome": "Miami",
+      "pais": "Estados Unidos",
+      "regiao": "norte",
+      "codigos": [
+        "MIA",
+        "FLL"
+      ],
+      "airbnb": "Miami--FL--United-States",
+      "capa": "Miami Beach",
+      "lugares": [
+        [
+          "Miami Beach",
+          "praia"
+        ],
+        [
+          "South Beach",
+          "praia"
+        ],
+        [
+          "Wynwood",
+          "bairro"
+        ],
+        [
+          "Little Havana",
+          "bairro"
+        ],
+        [
+          "Bayside Marketplace",
+          "passeio"
+        ],
+        [
+          "Everglades",
+          "natureza"
+        ],
+        [
+          "Vizcaya Museum and Gardens",
+          "museu"
+        ],
+        [
+          "Key West",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "orlando",
+      "nome": "Orlando",
+      "pais": "Estados Unidos",
+      "regiao": "norte",
+      "codigos": [
+        "ORL",
+        "MCO"
+      ],
+      "airbnb": "Orlando--FL--United-States",
+      "capa": "Magic Kingdom",
+      "lugares": [
+        [
+          "Magic Kingdom",
+          "passeio"
+        ],
+        [
+          "Epcot",
+          "passeio"
+        ],
+        [
+          "Universal Studios Florida",
+          "passeio"
+        ],
+        [
+          "Islands of Adventure",
+          "passeio"
+        ],
+        [
+          "Disney's Hollywood Studios",
+          "passeio"
+        ],
+        [
+          "Disney's Animal Kingdom",
+          "passeio"
+        ],
+        [
+          "Kennedy Space Center",
+          "museu"
+        ],
+        [
+          "Disney Springs",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "losangeles",
+      "nome": "Los Angeles",
+      "pais": "Estados Unidos",
+      "regiao": "norte",
+      "codigos": [
+        "LAX"
+      ],
+      "airbnb": "Los-Angeles--CA--United-States",
+      "capa": "Letreiro de Hollywood",
+      "lugares": [
+        [
+          "Letreiro de Hollywood",
+          "monumento"
+        ],
+        [
+          "Calçada da Fama de Hollywood",
+          "passeio"
+        ],
+        [
+          "Santa Monica Pier",
+          "praia"
+        ],
+        [
+          "Venice Beach",
+          "praia"
+        ],
+        [
+          "Getty Center",
+          "museu"
+        ],
+        [
+          "Observatório Griffith",
+          "passeio"
+        ],
+        [
+          "Universal Studios Hollywood",
+          "passeio"
+        ],
+        [
+          "Beverly Hills",
+          "bairro"
+        ]
+      ]
+    },
+    {
+      "id": "lasvegas",
+      "nome": "Las Vegas",
+      "pais": "Estados Unidos",
+      "regiao": "norte",
+      "codigos": [
+        "LAS"
+      ],
+      "airbnb": "Las-Vegas--NV--United-States",
+      "capa": "Las Vegas Strip",
+      "lugares": [
+        [
+          "Las Vegas Strip",
+          "passeio"
+        ],
+        [
+          "Fremont Street",
+          "passeio"
+        ],
+        [
+          "Bellagio",
+          "passeio"
+        ],
+        [
+          "Grand Canyon",
+          "natureza"
+        ],
+        [
+          "Sphere (Las Vegas)",
+          "passeio"
+        ],
+        [
+          "Red Rock Canyon",
+          "natureza"
+        ],
+        [
+          "Represa Hoover",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "cancun",
+      "nome": "Cancún",
+      "pais": "México",
+      "regiao": "norte",
+      "codigos": [
+        "CUN"
+      ],
+      "airbnb": "Cancun--Mexico",
+      "capa": "Zona Hoteleira de Cancún",
+      "lugares": [
+        [
+          "Zona Hoteleira de Cancún",
+          "praia"
+        ],
+        [
+          "Chichén Itzá",
+          "monumento"
+        ],
+        [
+          "Isla Mujeres",
+          "praia"
+        ],
+        [
+          "Tulum",
+          "monumento"
+        ],
+        [
+          "Playa del Carmen",
+          "praia"
+        ],
+        [
+          "Xcaret",
+          "passeio"
+        ],
+        [
+          "Cozumel",
+          "praia"
+        ],
+        [
+          "Cenote Ik Kil",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "cidademexico",
+      "nome": "Cidade do México",
+      "pais": "México",
+      "regiao": "norte",
+      "codigos": [
+        "MEX"
+      ],
+      "airbnb": "Mexico-City--Mexico",
+      "capa": "Zócalo",
+      "lugares": [
+        [
+          "Zócalo",
+          "passeio"
+        ],
+        [
+          "Teotihuacan",
+          "monumento"
+        ],
+        [
+          "Museu Nacional de Antropologia (México)",
+          "museu"
+        ],
+        [
+          "Casa Azul",
+          "museu"
+        ],
+        [
+          "Palácio de Belas Artes (Cidade do México)",
+          "monumento"
+        ],
+        [
+          "Xochimilco",
+          "passeio"
+        ],
+        [
+          "Castelo de Chapultepec",
+          "monumento"
+        ],
+        [
+          "Coyoacán",
+          "bairro"
+        ]
+      ]
+    },
+    {
+      "id": "puntacana",
+      "nome": "Punta Cana",
+      "pais": "República Dominicana",
+      "regiao": "norte",
+      "codigos": [
+        "PUJ"
+      ],
+      "airbnb": "Punta-Cana--Dominican-Republic",
+      "capa": "Punta Cana",
+      "lugares": [
+        [
+          "Praia Bávaro",
+          "praia"
+        ],
+        [
+          "Ilha Saona",
+          "praia"
+        ],
+        [
+          "Hoyo Azul",
+          "natureza"
+        ],
+        [
+          "Altos de Chavón",
+          "passeio"
+        ],
+        [
+          "Cap Cana",
+          "praia"
+        ],
+        [
+          "Ilha Catalina",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "toronto",
+      "nome": "Toronto",
+      "pais": "Canadá",
+      "regiao": "norte",
+      "codigos": [
+        "YTO",
+        "YYZ"
+      ],
+      "airbnb": "Toronto--ON--Canada",
+      "capa": "CN Tower",
+      "lugares": [
+        [
+          "CN Tower",
+          "monumento"
+        ],
+        [
+          "Cataratas do Niágara",
+          "natureza"
+        ],
+        [
+          "Distillery District",
+          "bairro"
+        ],
+        [
+          "Casa Loma",
+          "monumento"
+        ],
+        [
+          "Kensington Market",
+          "bairro"
+        ],
+        [
+          "Royal Ontario Museum",
+          "museu"
+        ],
+        [
+          "Ilhas de Toronto",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "lisboa",
+      "nome": "Lisboa",
+      "pais": "Portugal",
+      "regiao": "europa",
+      "codigos": [
+        "LIS"
+      ],
+      "airbnb": "Lisboa--Portugal",
+      "capa": "Torre de Belém",
+      "lugares": [
+        [
+          "Torre de Belém",
+          "monumento"
+        ],
+        [
+          "Mosteiro dos Jerónimos",
+          "monumento"
+        ],
+        [
+          "Alfama",
+          "bairro"
+        ],
+        [
+          "Castelo de São Jorge",
+          "monumento"
+        ],
+        [
+          "Praça do Comércio",
+          "passeio"
+        ],
+        [
+          "Bairro Alto",
+          "bairro"
+        ],
+        [
+          "Elétrico 28",
+          "passeio"
+        ],
+        [
+          "Sintra",
+          "passeio"
+        ],
+        [
+          "Oceanário de Lisboa",
+          "museu"
+        ],
+        [
+          "LX Factory",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "porto",
+      "nome": "Porto",
+      "pais": "Portugal",
+      "regiao": "europa",
+      "codigos": [
+        "OPO"
+      ],
+      "airbnb": "Porto--Portugal",
+      "capa": "Ribeira (Porto)",
+      "lugares": [
+        [
+          "Ribeira (Porto)",
+          "bairro"
+        ],
+        [
+          "Ponte Luís I",
+          "monumento"
+        ],
+        [
+          "Livraria Lello",
+          "passeio"
+        ],
+        [
+          "Torre dos Clérigos",
+          "monumento"
+        ],
+        [
+          "Estação de São Bento",
+          "monumento"
+        ],
+        [
+          "Caves do Vinho do Porto",
+          "passeio"
+        ],
+        [
+          "Vale do Douro",
+          "natureza"
+        ],
+        [
+          "Palácio da Bolsa",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "paris",
+      "nome": "Paris",
+      "pais": "França",
+      "regiao": "europa",
+      "codigos": [
+        "PAR",
+        "CDG",
+        "ORY"
+      ],
+      "airbnb": "Paris--France",
+      "capa": "Torre Eiffel",
+      "lugares": [
+        [
+          "Torre Eiffel",
+          "monumento"
+        ],
+        [
+          "Museu do Louvre",
+          "museu"
+        ],
+        [
+          "Arco do Triunfo",
+          "monumento"
+        ],
+        [
+          "Catedral de Notre-Dame de Paris",
+          "monumento"
+        ],
+        [
+          "Montmartre",
+          "bairro"
+        ],
+        [
+          "Museu d'Orsay",
+          "museu"
+        ],
+        [
+          "Champs-Élysées",
+          "passeio"
+        ],
+        [
+          "Palácio de Versalhes",
+          "monumento"
+        ],
+        [
+          "Sainte-Chapelle",
+          "monumento"
+        ],
+        [
+          "Jardim de Luxemburgo",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "londres",
+      "nome": "Londres",
+      "pais": "Reino Unido",
+      "regiao": "europa",
+      "codigos": [
+        "LON",
+        "LHR",
+        "LGW"
+      ],
+      "airbnb": "London--United-Kingdom",
+      "capa": "Big Ben",
+      "lugares": [
+        [
+          "Big Ben",
+          "monumento"
+        ],
+        [
+          "London Eye",
+          "passeio"
+        ],
+        [
+          "Museu Britânico",
+          "museu"
+        ],
+        [
+          "Tower Bridge",
+          "monumento"
+        ],
+        [
+          "Torre de Londres",
+          "monumento"
+        ],
+        [
+          "Palácio de Buckingham",
+          "monumento"
+        ],
+        [
+          "Camden Town",
+          "bairro"
+        ],
+        [
+          "Hyde Park",
+          "natureza"
+        ],
+        [
+          "Abadia de Westminster",
+          "monumento"
+        ],
+        [
+          "Notting Hill",
+          "bairro"
+        ]
+      ]
+    },
+    {
+      "id": "madri",
+      "nome": "Madri",
+      "pais": "Espanha",
+      "regiao": "europa",
+      "codigos": [
+        "MAD"
+      ],
+      "airbnb": "Madrid--Spain",
+      "capa": "Plaza Mayor (Madrid)",
+      "lugares": [
+        [
+          "Museu do Prado",
+          "museu"
+        ],
+        [
+          "Palácio Real de Madrid",
+          "monumento"
+        ],
+        [
+          "Parque do Retiro",
+          "natureza"
+        ],
+        [
+          "Plaza Mayor (Madrid)",
+          "passeio"
+        ],
+        [
+          "Puerta del Sol",
+          "passeio"
+        ],
+        [
+          "Museu Rainha Sofia",
+          "museu"
+        ],
+        [
+          "Gran Vía",
+          "passeio"
+        ],
+        [
+          "Estádio Santiago Bernabéu",
+          "passeio"
+        ],
+        [
+          "Toledo (Espanha)",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "barcelona",
+      "nome": "Barcelona",
+      "pais": "Espanha",
+      "regiao": "europa",
+      "codigos": [
+        "BCN"
+      ],
+      "airbnb": "Barcelona--Spain",
+      "capa": "Sagrada Família",
+      "lugares": [
+        [
+          "Sagrada Família",
+          "monumento"
+        ],
+        [
+          "Park Güell",
+          "natureza"
+        ],
+        [
+          "Casa Batlló",
+          "monumento"
+        ],
+        [
+          "La Rambla",
+          "passeio"
+        ],
+        [
+          "Bairro Gótico",
+          "bairro"
+        ],
+        [
+          "Casa Milà",
+          "monumento"
+        ],
+        [
+          "Praia da Barceloneta",
+          "praia"
+        ],
+        [
+          "Montjuïc",
+          "natureza"
+        ],
+        [
+          "Mercado de La Boqueria",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "roma",
+      "nome": "Roma",
+      "pais": "Itália",
+      "regiao": "europa",
+      "codigos": [
+        "ROM",
+        "FCO"
+      ],
+      "airbnb": "Rome--Italy",
+      "capa": "Coliseu",
+      "lugares": [
+        [
+          "Coliseu",
+          "monumento"
+        ],
+        [
+          "Fontana di Trevi",
+          "monumento"
+        ],
+        [
+          "Panteão (Roma)",
+          "monumento"
+        ],
+        [
+          "Vaticano",
+          "monumento"
+        ],
+        [
+          "Capela Sistina",
+          "museu"
+        ],
+        [
+          "Fórum Romano",
+          "monumento"
+        ],
+        [
+          "Piazza Navona",
+          "passeio"
+        ],
+        [
+          "Escadaria da Praça da Espanha",
+          "passeio"
+        ],
+        [
+          "Trastevere",
+          "bairro"
+        ]
+      ]
+    },
+    {
+      "id": "milao",
+      "nome": "Milão",
+      "pais": "Itália",
+      "regiao": "europa",
+      "codigos": [
+        "MIL",
+        "MXP",
+        "LIN",
+        "BGY"
+      ],
+      "airbnb": "Milan--Italy",
+      "capa": "Catedral de Milão",
+      "lugares": [
+        [
+          "Catedral de Milão",
+          "monumento"
+        ],
+        [
+          "Galleria Vittorio Emanuele II",
+          "passeio"
+        ],
+        [
+          "A Última Ceia (Leonardo da Vinci)",
+          "museu"
+        ],
+        [
+          "Castelo Sforzesco",
+          "monumento"
+        ],
+        [
+          "Navigli",
+          "bairro"
+        ],
+        [
+          "Lago de Como",
+          "natureza"
+        ],
+        [
+          "Teatro alla Scala",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "amsterda",
+      "nome": "Amsterdã",
+      "pais": "Holanda",
+      "regiao": "europa",
+      "codigos": [
+        "AMS"
+      ],
+      "airbnb": "Amsterdam--Netherlands",
+      "capa": "Canais de Amsterdã",
+      "lugares": [
+        [
+          "Rijksmuseum",
+          "museu"
+        ],
+        [
+          "Museu Van Gogh",
+          "museu"
+        ],
+        [
+          "Casa de Anne Frank",
+          "museu"
+        ],
+        [
+          "Canais de Amsterdã",
+          "passeio"
+        ],
+        [
+          "Vondelpark",
+          "natureza"
+        ],
+        [
+          "Praça Dam",
+          "passeio"
+        ],
+        [
+          "Jordaan",
+          "bairro"
+        ],
+        [
+          "Zaanse Schans",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "berlim",
+      "nome": "Berlim",
+      "pais": "Alemanha",
+      "regiao": "europa",
+      "codigos": [
+        "BER"
+      ],
+      "airbnb": "Berlin--Germany",
+      "capa": "Portão de Brandemburgo",
+      "lugares": [
+        [
+          "Portão de Brandemburgo",
+          "monumento"
+        ],
+        [
+          "Muro de Berlim",
+          "monumento"
+        ],
+        [
+          "East Side Gallery",
+          "passeio"
+        ],
+        [
+          "Reichstag",
+          "monumento"
+        ],
+        [
+          "Ilha dos Museus",
+          "museu"
+        ],
+        [
+          "Memorial aos Judeus Mortos da Europa",
+          "monumento"
+        ],
+        [
+          "Checkpoint Charlie",
+          "monumento"
+        ],
+        [
+          "Alexanderplatz",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "praga",
+      "nome": "Praga",
+      "pais": "República Tcheca",
+      "regiao": "europa",
+      "codigos": [
+        "PRG"
+      ],
+      "airbnb": "Prague--Czechia",
+      "capa": "Ponte Carlos",
+      "lugares": [
+        [
+          "Ponte Carlos",
+          "monumento"
+        ],
+        [
+          "Castelo de Praga",
+          "monumento"
+        ],
+        [
+          "Relógio Astronômico de Praga",
+          "monumento"
+        ],
+        [
+          "Praça da Cidade Velha (Praga)",
+          "passeio"
+        ],
+        [
+          "Catedral de São Vito",
+          "monumento"
+        ],
+        [
+          "Bairro Judeu de Praga",
+          "bairro"
+        ],
+        [
+          "Mala Strana",
+          "bairro"
+        ]
+      ]
+    },
+    {
+      "id": "atenas",
+      "nome": "Atenas e ilhas gregas",
+      "pais": "Grécia",
+      "regiao": "europa",
+      "codigos": [
+        "ATH"
+      ],
+      "airbnb": "Athens--Greece",
+      "capa": "Acrópole de Atenas",
+      "lugares": [
+        [
+          "Acrópole de Atenas",
+          "monumento"
+        ],
+        [
+          "Partenon",
+          "monumento"
+        ],
+        [
+          "Museu da Acrópole",
+          "museu"
+        ],
+        [
+          "Plaka",
+          "bairro"
+        ],
+        [
+          "Santorini",
+          "praia"
+        ],
+        [
+          "Míconos",
+          "praia"
+        ],
+        [
+          "Templo de Zeus Olímpico (Atenas)",
+          "monumento"
+        ],
+        [
+          "Cabo Sounion",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "istambul",
+      "nome": "Istambul",
+      "pais": "Turquia",
+      "regiao": "europa",
+      "codigos": [
+        "IST",
+        "SAW"
+      ],
+      "airbnb": "Istanbul--Turkey",
+      "capa": "Santa Sofia",
+      "lugares": [
+        [
+          "Santa Sofia",
+          "monumento"
+        ],
+        [
+          "Mesquita Azul",
+          "monumento"
+        ],
+        [
+          "Grande Bazar de Istambul",
+          "passeio"
+        ],
+        [
+          "Palácio de Topkapı",
+          "monumento"
+        ],
+        [
+          "Cisterna da Basílica",
+          "monumento"
+        ],
+        [
+          "Bósforo",
+          "passeio"
+        ],
+        [
+          "Torre de Gálata",
+          "monumento"
+        ],
+        [
+          "Capadócia",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "toquio",
+      "nome": "Tóquio",
+      "pais": "Japão",
+      "regiao": "mundo",
+      "codigos": [
+        "TYO",
+        "NRT",
+        "HND"
+      ],
+      "airbnb": "Tokyo--Japan",
+      "capa": "Shibuya",
+      "lugares": [
+        [
+          "Cruzamento de Shibuya",
+          "passeio"
+        ],
+        [
+          "Sensō-ji",
+          "monumento"
+        ],
+        [
+          "Tokyo Skytree",
+          "monumento"
+        ],
+        [
+          "Santuário Meiji",
+          "monumento"
+        ],
+        [
+          "Shinjuku",
+          "bairro"
+        ],
+        [
+          "Akihabara",
+          "bairro"
+        ],
+        [
+          "Monte Fuji",
+          "natureza"
+        ],
+        [
+          "Palácio Imperial de Tóquio",
+          "monumento"
+        ],
+        [
+          "Tokyo Disneyland",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "bangkok",
+      "nome": "Bangkok e Tailândia",
+      "pais": "Tailândia",
+      "regiao": "mundo",
+      "codigos": [
+        "BKK",
+        "HKT"
+      ],
+      "airbnb": "Bangkok--Thailand",
+      "capa": "Wat Arun",
+      "lugares": [
+        [
+          "Grande Palácio",
+          "monumento"
+        ],
+        [
+          "Wat Pho",
+          "monumento"
+        ],
+        [
+          "Wat Arun",
+          "monumento"
+        ],
+        [
+          "Mercado de Chatuchak",
+          "passeio"
+        ],
+        [
+          "Khao San Road",
+          "passeio"
+        ],
+        [
+          "Phuket",
+          "praia"
+        ],
+        [
+          "Ilhas Phi Phi",
+          "praia"
+        ],
+        [
+          "Ayutthaya",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "cidadedocabo",
+      "nome": "Cidade do Cabo",
+      "pais": "África do Sul",
+      "regiao": "mundo",
+      "codigos": [
+        "CPT"
+      ],
+      "airbnb": "Cape-Town--South-Africa",
+      "capa": "Table Mountain",
+      "lugares": [
+        [
+          "Table Mountain",
+          "natureza"
+        ],
+        [
+          "Cabo da Boa Esperança",
+          "natureza"
+        ],
+        [
+          "V&A Waterfront",
+          "passeio"
+        ],
+        [
+          "Boulders Beach",
+          "praia"
+        ],
+        [
+          "Robben Island",
+          "monumento"
+        ],
+        [
+          "Bo-Kaap",
+          "bairro"
+        ],
+        [
+          "Jardim Botânico Kirstenbosch",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "marrakech",
+      "nome": "Marrakech",
+      "pais": "Marrocos",
+      "regiao": "mundo",
+      "codigos": [
+        "RAK"
+      ],
+      "airbnb": "Marrakesh--Morocco",
+      "capa": "Jemaa el-Fna",
+      "lugares": [
+        [
+          "Jemaa el-Fna",
+          "passeio"
+        ],
+        [
+          "Jardim Majorelle",
+          "natureza"
+        ],
+        [
+          "Mesquita Koutoubia",
+          "monumento"
+        ],
+        [
+          "Palácio da Bahia",
+          "monumento"
+        ],
+        [
+          "Medina de Marrakech",
+          "bairro"
+        ],
+        [
+          "Túmulos Saadianos",
+          "monumento"
+        ],
+        [
+          "Deserto do Saara",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "sydney",
+      "nome": "Sydney",
+      "pais": "Austrália",
+      "regiao": "mundo",
+      "codigos": [
+        "SYD"
+      ],
+      "airbnb": "Sydney--NSW--Australia",
+      "capa": "Sydney Opera House",
+      "lugares": [
+        [
+          "Sydney Opera House",
+          "monumento"
+        ],
+        [
+          "Ponte da Baía de Sydney",
+          "monumento"
+        ],
+        [
+          "Bondi Beach",
+          "praia"
+        ],
+        [
+          "Montanhas Azuis",
+          "natureza"
+        ],
+        [
+          "Darling Harbour",
+          "passeio"
+        ],
+        [
+          "The Rocks",
+          "bairro"
+        ],
+        [
+          "Manly Beach",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "buzios",
+      "nome": "Búzios e Arraial do Cabo",
+      "uf": "RJ",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "CFB",
+        "RIO",
+        "GIG",
+        "SDU"
+      ],
+      "obs": "voo até Cabo Frio ou Rio",
+      "airbnb": "Buzios--RJ",
+      "capa": "Armação dos Búzios",
+      "lugares": [
+        [
+          "Rua das Pedras",
+          "passeio"
+        ],
+        [
+          "Praia de Geribá",
+          "praia"
+        ],
+        [
+          "Praia João Fernandes",
+          "praia"
+        ],
+        [
+          "Orla Bardot",
+          "passeio"
+        ],
+        [
+          "Arraial do Cabo",
+          "praia"
+        ],
+        [
+          "Praia do Forno (Arraial do Cabo)",
+          "praia"
+        ],
+        [
+          "Prainhas do Pontal do Atalaia",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "chapada",
+      "nome": "Chapada Diamantina",
+      "uf": "BA",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "LEC",
+        "SSA"
+      ],
+      "obs": "voo até Lençóis (BA) ou Salvador",
+      "airbnb": "Lencois--BA",
+      "capa": "Morro do Pai Inácio",
+      "lugares": [
+        [
+          "Morro do Pai Inácio",
+          "natureza"
+        ],
+        [
+          "Cachoeira da Fumaça",
+          "natureza"
+        ],
+        [
+          "Poço Azul",
+          "natureza"
+        ],
+        [
+          "Gruta da Lapa Doce",
+          "natureza"
+        ],
+        [
+          "Vale do Pati",
+          "natureza"
+        ],
+        [
+          "Lençóis (Bahia)",
+          "bairro"
+        ],
+        [
+          "Cachoeira do Buracão",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "jalapao",
+      "nome": "Jalapão",
+      "uf": "TO",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "PMW"
+      ],
+      "obs": "voo até Palmas",
+      "airbnb": "Palmas--TO",
+      "capa": "Parque Estadual do Jalapão",
+      "lugares": [
+        [
+          "Parque Estadual do Jalapão",
+          "natureza"
+        ],
+        [
+          "Dunas do Jalapão",
+          "natureza"
+        ],
+        [
+          "Fervedouro",
+          "natureza"
+        ],
+        [
+          "Cachoeira da Velha",
+          "natureza"
+        ],
+        [
+          "Pedra Furada (Jalapão)",
+          "natureza"
+        ],
+        [
+          "Mateiros",
+          "bairro"
+        ]
+      ]
+    },
+    {
+      "id": "alterdochao",
+      "nome": "Alter do Chão",
+      "uf": "PA",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "STM"
+      ],
+      "obs": "voo até Santarém",
+      "airbnb": "Alter-do-Chao--Santarem--PA",
+      "capa": "Alter do Chão",
+      "lugares": [
+        [
+          "Alter do Chão",
+          "praia"
+        ],
+        [
+          "Ilha do Amor (Pará)",
+          "praia"
+        ],
+        [
+          "Floresta Nacional do Tapajós",
+          "natureza"
+        ],
+        [
+          "Rio Tapajós",
+          "natureza"
+        ],
+        [
+          "Encontro das Águas (Santarém)",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "itacare",
+      "nome": "Itacaré e Ilhéus",
+      "uf": "BA",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "IOS"
+      ],
+      "obs": "voo até Ilhéus",
+      "airbnb": "Itacare--BA",
+      "capa": "Itacaré",
+      "lugares": [
+        [
+          "Itacaré",
+          "praia"
+        ],
+        [
+          "Prainha (Itacaré)",
+          "praia"
+        ],
+        [
+          "Praia da Engenhoca",
+          "praia"
+        ],
+        [
+          "Península de Maraú",
+          "praia"
+        ],
+        [
+          "Casa de Jorge Amado",
+          "museu"
+        ],
+        [
+          "Catedral de São Sebastião (Ilhéus)",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "morrosp",
+      "nome": "Morro de São Paulo e Boipeba",
+      "uf": "BA",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "SSA"
+      ],
+      "obs": "voo até Salvador + barco ou avião pequeno",
+      "airbnb": "Morro-de-Sao-Paulo--Cairu--BA",
+      "capa": "Morro de São Paulo",
+      "lugares": [
+        [
+          "Morro de São Paulo",
+          "praia"
+        ],
+        [
+          "Ilha de Boipeba",
+          "praia"
+        ],
+        [
+          "Farol do Morro de São Paulo",
+          "monumento"
+        ],
+        [
+          "Tirolesa do Morro de São Paulo",
+          "passeio"
+        ],
+        [
+          "Praia do Encanto",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "aracaju",
+      "nome": "Aracaju",
+      "uf": "SE",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "AJU"
+      ],
+      "airbnb": "Aracaju--SE",
+      "capa": "Orla de Atalaia",
+      "lugares": [
+        [
+          "Orla de Atalaia",
+          "praia"
+        ],
+        [
+          "Cânion do Xingó",
+          "natureza"
+        ],
+        [
+          "Praia do Saco",
+          "praia"
+        ],
+        [
+          "Mangue Seco",
+          "praia"
+        ],
+        [
+          "Mercado Municipal de Aracaju",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "pantanal",
+      "nome": "Pantanal e Chapada dos Guimarães",
+      "uf": "MT",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "CGB"
+      ],
+      "obs": "voo até Cuiabá",
+      "airbnb": "Chapada-dos-Guimaraes--MT",
+      "capa": "Pantanal",
+      "lugares": [
+        [
+          "Pantanal",
+          "natureza"
+        ],
+        [
+          "Parque Nacional da Chapada dos Guimarães",
+          "natureza"
+        ],
+        [
+          "Cachoeira Véu de Noiva (Mato Grosso)",
+          "natureza"
+        ],
+        [
+          "Rodovia Transpantaneira",
+          "passeio"
+        ],
+        [
+          "Cidade de Pedra (Chapada dos Guimarães)",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "camboriu",
+      "nome": "Balneário Camboriú",
+      "uf": "SC",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "NVT"
+      ],
+      "obs": "voo até Navegantes",
+      "airbnb": "Balneario-Camboriu--SC",
+      "capa": "Balneário Camboriú",
+      "lugares": [
+        [
+          "Parque Unipraias",
+          "passeio"
+        ],
+        [
+          "Praia Central de Balneário Camboriú",
+          "praia"
+        ],
+        [
+          "Praia de Laranjeiras",
+          "praia"
+        ],
+        [
+          "Beto Carrero World",
+          "passeio"
+        ],
+        [
+          "Cristo Luz",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "vitoria",
+      "nome": "Vitória e Guarapari",
+      "uf": "ES",
+      "pais": "Brasil",
+      "regiao": "brasil",
+      "codigos": [
+        "VIX"
+      ],
+      "airbnb": "Vitoria--ES",
+      "capa": "Convento da Penha",
+      "lugares": [
+        [
+          "Convento da Penha",
+          "monumento"
+        ],
+        [
+          "Praia de Camburi",
+          "praia"
+        ],
+        [
+          "Guarapari",
+          "praia"
+        ],
+        [
+          "Pedra Azul (Espírito Santo)",
+          "natureza"
+        ],
+        [
+          "Ilha do Boi",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "ushuaia",
+      "nome": "Ushuaia",
+      "pais": "Argentina",
+      "regiao": "sul",
+      "codigos": [
+        "USH"
+      ],
+      "airbnb": "Ushuaia--Argentina",
+      "capa": "Ushuaia",
+      "lugares": [
+        [
+          "Parque Nacional Tierra del Fuego",
+          "natureza"
+        ],
+        [
+          "Canal de Beagle",
+          "natureza"
+        ],
+        [
+          "Farol Les Eclaireurs",
+          "monumento"
+        ],
+        [
+          "Trem do Fim do Mundo",
+          "passeio"
+        ],
+        [
+          "Glaciar Martial",
+          "natureza"
+        ],
+        [
+          "Museu Marítimo de Ushuaia",
+          "museu"
+        ]
+      ]
+    },
+    {
+      "id": "calafate",
+      "nome": "El Calafate",
+      "pais": "Argentina",
+      "regiao": "sul",
+      "codigos": [
+        "FTE"
+      ],
+      "airbnb": "El-Calafate--Argentina",
+      "capa": "Glaciar Perito Moreno",
+      "lugares": [
+        [
+          "Glaciar Perito Moreno",
+          "natureza"
+        ],
+        [
+          "Parque Nacional Los Glaciares",
+          "natureza"
+        ],
+        [
+          "Lago Argentino",
+          "natureza"
+        ],
+        [
+          "El Chaltén",
+          "natureza"
+        ],
+        [
+          "Glaciar Upsala",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "atacama",
+      "nome": "Deserto do Atacama",
+      "pais": "Chile",
+      "regiao": "sul",
+      "codigos": [
+        "CJC"
+      ],
+      "obs": "voo até Calama",
+      "airbnb": "San-Pedro-de-Atacama--Chile",
+      "capa": "Deserto do Atacama",
+      "lugares": [
+        [
+          "San Pedro de Atacama",
+          "bairro"
+        ],
+        [
+          "Vale da Lua (Chile)",
+          "natureza"
+        ],
+        [
+          "Gêiseres del Tatio",
+          "natureza"
+        ],
+        [
+          "Lagunas Altiplánicas",
+          "natureza"
+        ],
+        [
+          "Salar de Atacama",
+          "natureza"
+        ],
+        [
+          "Lagoa Cejar",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "bogota",
+      "nome": "Bogotá",
+      "pais": "Colômbia",
+      "regiao": "sul",
+      "codigos": [
+        "BOG"
+      ],
+      "airbnb": "Bogota--Colombia",
+      "capa": "Monserrate",
+      "lugares": [
+        [
+          "Monserrate",
+          "natureza"
+        ],
+        [
+          "La Candelaria",
+          "bairro"
+        ],
+        [
+          "Museu do Ouro",
+          "museu"
+        ],
+        [
+          "Museu Botero",
+          "museu"
+        ],
+        [
+          "Catedral de Sal de Zipaquirá",
+          "monumento"
+        ],
+        [
+          "Praça de Bolívar",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "sanandres",
+      "nome": "San Andrés",
+      "pais": "Colômbia",
+      "regiao": "norte",
+      "codigos": [
+        "ADZ"
+      ],
+      "airbnb": "San-Andres--Colombia",
+      "capa": "Ilha de San Andrés",
+      "lugares": [
+        [
+          "Ilha de San Andrés",
+          "praia"
+        ],
+        [
+          "Johnny Cay",
+          "praia"
+        ],
+        [
+          "Aquário de San Andrés",
+          "natureza"
+        ],
+        [
+          "Hoyo Soplador",
+          "natureza"
+        ],
+        [
+          "Providencia",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "aruba",
+      "nome": "Aruba",
+      "pais": "Aruba",
+      "regiao": "norte",
+      "codigos": [
+        "AUA"
+      ],
+      "airbnb": "Aruba",
+      "capa": "Eagle Beach",
+      "lugares": [
+        [
+          "Eagle Beach",
+          "praia"
+        ],
+        [
+          "Palm Beach (Aruba)",
+          "praia"
+        ],
+        [
+          "Parque Nacional Arikok",
+          "natureza"
+        ],
+        [
+          "Oranjestad",
+          "bairro"
+        ],
+        [
+          "Flamingo Beach",
+          "praia"
+        ],
+        [
+          "California Lighthouse",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "curacao",
+      "nome": "Curaçao",
+      "pais": "Curaçao",
+      "regiao": "norte",
+      "codigos": [
+        "CUR"
+      ],
+      "airbnb": "Curacao",
+      "capa": "Willemstad",
+      "lugares": [
+        [
+          "Willemstad",
+          "bairro"
+        ],
+        [
+          "Ponte Rainha Ema",
+          "monumento"
+        ],
+        [
+          "Grote Knip",
+          "praia"
+        ],
+        [
+          "Parque Nacional Christoffel",
+          "natureza"
+        ],
+        [
+          "Playa Kenepa",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "panama",
+      "nome": "Cidade do Panamá",
+      "pais": "Panamá",
+      "regiao": "norte",
+      "codigos": [
+        "PTY"
+      ],
+      "airbnb": "Panama-City--Panama",
+      "capa": "Canal do Panamá",
+      "lugares": [
+        [
+          "Canal do Panamá",
+          "passeio"
+        ],
+        [
+          "Casco Viejo",
+          "bairro"
+        ],
+        [
+          "Eclusas de Miraflores",
+          "passeio"
+        ],
+        [
+          "Biomuseo",
+          "museu"
+        ],
+        [
+          "San Blas",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "havana",
+      "nome": "Havana",
+      "pais": "Cuba",
+      "regiao": "norte",
+      "codigos": [
+        "HAV"
+      ],
+      "airbnb": "Havana--Cuba",
+      "capa": "Havana Velha",
+      "lugares": [
+        [
+          "Havana Velha",
+          "bairro"
+        ],
+        [
+          "Malecón (Havana)",
+          "passeio"
+        ],
+        [
+          "Capitólio Nacional (Cuba)",
+          "monumento"
+        ],
+        [
+          "Praça da Revolução (Havana)",
+          "passeio"
+        ],
+        [
+          "Varadero",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "sanfrancisco",
+      "nome": "São Francisco",
+      "pais": "Estados Unidos",
+      "regiao": "norte",
+      "codigos": [
+        "SFO"
+      ],
+      "airbnb": "San-Francisco--CA--United-States",
+      "capa": "Ponte Golden Gate",
+      "lugares": [
+        [
+          "Ponte Golden Gate",
+          "monumento"
+        ],
+        [
+          "Alcatraz",
+          "monumento"
+        ],
+        [
+          "Fisherman's Wharf",
+          "passeio"
+        ],
+        [
+          "Lombard Street",
+          "passeio"
+        ],
+        [
+          "Chinatown (São Francisco)",
+          "bairro"
+        ],
+        [
+          "Golden Gate Park",
+          "natureza"
+        ],
+        [
+          "Vale de Napa",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "chicago",
+      "nome": "Chicago",
+      "pais": "Estados Unidos",
+      "regiao": "norte",
+      "codigos": [
+        "CHI",
+        "ORD"
+      ],
+      "airbnb": "Chicago--IL--United-States",
+      "capa": "Cloud Gate",
+      "lugares": [
+        [
+          "Cloud Gate",
+          "monumento"
+        ],
+        [
+          "Millennium Park",
+          "natureza"
+        ],
+        [
+          "Instituto de Arte de Chicago",
+          "museu"
+        ],
+        [
+          "Willis Tower",
+          "monumento"
+        ],
+        [
+          "Navy Pier",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "washington",
+      "nome": "Washington",
+      "pais": "Estados Unidos",
+      "regiao": "norte",
+      "codigos": [
+        "WAS",
+        "IAD"
+      ],
+      "airbnb": "Washington--DC--United-States",
+      "capa": "Capitólio dos Estados Unidos",
+      "lugares": [
+        [
+          "Casa Branca",
+          "monumento"
+        ],
+        [
+          "Capitólio dos Estados Unidos",
+          "monumento"
+        ],
+        [
+          "Memorial de Lincoln",
+          "monumento"
+        ],
+        [
+          "Monumento a Washington",
+          "monumento"
+        ],
+        [
+          "Museu Nacional do Ar e Espaço",
+          "museu"
+        ]
+      ]
+    },
+    {
+      "id": "veneza",
+      "nome": "Veneza",
+      "pais": "Itália",
+      "regiao": "europa",
+      "codigos": [
+        "VCE"
+      ],
+      "airbnb": "Venice--Italy",
+      "capa": "Grande Canal (Veneza)",
+      "lugares": [
+        [
+          "Praça de São Marcos",
+          "passeio"
+        ],
+        [
+          "Basílica de São Marcos",
+          "monumento"
+        ],
+        [
+          "Ponte de Rialto",
+          "monumento"
+        ],
+        [
+          "Grande Canal (Veneza)",
+          "passeio"
+        ],
+        [
+          "Palácio Ducal (Veneza)",
+          "museu"
+        ],
+        [
+          "Murano",
+          "bairro"
+        ],
+        [
+          "Burano",
+          "bairro"
+        ]
+      ]
+    },
+    {
+      "id": "florenca",
+      "nome": "Florença e Toscana",
+      "pais": "Itália",
+      "regiao": "europa",
+      "codigos": [
+        "FLR",
+        "PSA"
+      ],
+      "airbnb": "Florence--Italy",
+      "capa": "Catedral de Florença",
+      "lugares": [
+        [
+          "Catedral de Florença",
+          "monumento"
+        ],
+        [
+          "Galleria degli Uffizi",
+          "museu"
+        ],
+        [
+          "Ponte Vecchio",
+          "monumento"
+        ],
+        [
+          "Galleria dell'Accademia",
+          "museu"
+        ],
+        [
+          "Piazzale Michelangelo",
+          "passeio"
+        ],
+        [
+          "Torre de Pisa",
+          "monumento"
+        ],
+        [
+          "Siena",
+          "bairro"
+        ]
+      ]
+    },
+    {
+      "id": "napoles",
+      "nome": "Nápoles e Costa Amalfitana",
+      "pais": "Itália",
+      "regiao": "europa",
+      "codigos": [
+        "NAP"
+      ],
+      "airbnb": "Naples--Italy",
+      "capa": "Costa Amalfitana",
+      "lugares": [
+        [
+          "Costa Amalfitana",
+          "natureza"
+        ],
+        [
+          "Positano",
+          "bairro"
+        ],
+        [
+          "Pompeia",
+          "monumento"
+        ],
+        [
+          "Capri",
+          "praia"
+        ],
+        [
+          "Vesúvio",
+          "natureza"
+        ],
+        [
+          "Amalfi",
+          "bairro"
+        ]
+      ]
+    },
+    {
+      "id": "sevilha",
+      "nome": "Sevilha",
+      "pais": "Espanha",
+      "regiao": "europa",
+      "codigos": [
+        "SVQ"
+      ],
+      "airbnb": "Seville--Spain",
+      "capa": "Praça de Espanha (Sevilha)",
+      "lugares": [
+        [
+          "Praça de Espanha (Sevilha)",
+          "passeio"
+        ],
+        [
+          "Real Alcázar de Sevilha",
+          "monumento"
+        ],
+        [
+          "Catedral de Sevilha",
+          "monumento"
+        ],
+        [
+          "Giralda",
+          "monumento"
+        ],
+        [
+          "Metropol Parasol",
+          "monumento"
+        ],
+        [
+          "Alhambra",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "viena",
+      "nome": "Viena",
+      "pais": "Áustria",
+      "regiao": "europa",
+      "codigos": [
+        "VIE"
+      ],
+      "airbnb": "Vienna--Austria",
+      "capa": "Palácio de Schönbrunn",
+      "lugares": [
+        [
+          "Palácio de Schönbrunn",
+          "monumento"
+        ],
+        [
+          "Catedral de Santo Estêvão (Viena)",
+          "monumento"
+        ],
+        [
+          "Palácio Belvedere",
+          "museu"
+        ],
+        [
+          "Ópera Estatal de Viena",
+          "monumento"
+        ],
+        [
+          "Hofburg",
+          "monumento"
+        ],
+        [
+          "Prater",
+          "passeio"
+        ]
+      ]
+    },
+    {
+      "id": "budapeste",
+      "nome": "Budapeste",
+      "pais": "Hungria",
+      "regiao": "europa",
+      "codigos": [
+        "BUD"
+      ],
+      "airbnb": "Budapest--Hungary",
+      "capa": "Parlamento Húngaro",
+      "lugares": [
+        [
+          "Parlamento Húngaro",
+          "monumento"
+        ],
+        [
+          "Bastião dos Pescadores",
+          "monumento"
+        ],
+        [
+          "Ponte das Correntes",
+          "monumento"
+        ],
+        [
+          "Termas Széchenyi",
+          "passeio"
+        ],
+        [
+          "Castelo de Buda",
+          "monumento"
+        ],
+        [
+          "Basílica de Santo Estêvão (Budapeste)",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "dublin",
+      "nome": "Dublin",
+      "pais": "Irlanda",
+      "regiao": "europa",
+      "codigos": [
+        "DUB"
+      ],
+      "airbnb": "Dublin--Ireland",
+      "capa": "Temple Bar (Dublin)",
+      "lugares": [
+        [
+          "Temple Bar (Dublin)",
+          "bairro"
+        ],
+        [
+          "Trinity College (Dublin)",
+          "museu"
+        ],
+        [
+          "Guinness Storehouse",
+          "passeio"
+        ],
+        [
+          "Catedral de São Patrício (Dublin)",
+          "monumento"
+        ],
+        [
+          "Falésias de Moher",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "edimburgo",
+      "nome": "Edimburgo",
+      "pais": "Reino Unido",
+      "regiao": "europa",
+      "codigos": [
+        "EDI"
+      ],
+      "airbnb": "Edinburgh--United-Kingdom",
+      "capa": "Castelo de Edimburgo",
+      "lugares": [
+        [
+          "Castelo de Edimburgo",
+          "monumento"
+        ],
+        [
+          "Royal Mile",
+          "passeio"
+        ],
+        [
+          "Arthur's Seat",
+          "natureza"
+        ],
+        [
+          "Calton Hill",
+          "natureza"
+        ],
+        [
+          "Palácio de Holyrood",
+          "monumento"
+        ],
+        [
+          "Loch Ness",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "suica",
+      "nome": "Zurique e Alpes suíços",
+      "pais": "Suíça",
+      "regiao": "europa",
+      "codigos": [
+        "ZRH",
+        "GVA"
+      ],
+      "airbnb": "Zurich--Switzerland",
+      "capa": "Matterhorn",
+      "lugares": [
+        [
+          "Matterhorn",
+          "natureza"
+        ],
+        [
+          "Jungfraujoch",
+          "natureza"
+        ],
+        [
+          "Lucerna",
+          "bairro"
+        ],
+        [
+          "Interlaken",
+          "bairro"
+        ],
+        [
+          "Lago de Zurique",
+          "natureza"
+        ],
+        [
+          "Lago Léman",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "nice",
+      "nome": "Nice e Riviera Francesa",
+      "pais": "França",
+      "regiao": "europa",
+      "codigos": [
+        "NCE"
+      ],
+      "airbnb": "Nice--France",
+      "capa": "Promenade des Anglais",
+      "lugares": [
+        [
+          "Promenade des Anglais",
+          "passeio"
+        ],
+        [
+          "Mônaco",
+          "bairro"
+        ],
+        [
+          "Cannes",
+          "praia"
+        ],
+        [
+          "Èze",
+          "bairro"
+        ],
+        [
+          "Vieux Nice",
+          "bairro"
+        ],
+        [
+          "Saint-Tropez",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "dubai",
+      "nome": "Dubai",
+      "pais": "Emirados Árabes",
+      "regiao": "mundo",
+      "codigos": [
+        "DXB",
+        "DWC"
+      ],
+      "airbnb": "Dubai--United-Arab-Emirates",
+      "capa": "Burj Khalifa",
+      "lugares": [
+        [
+          "Burj Khalifa",
+          "monumento"
+        ],
+        [
+          "Dubai Mall",
+          "passeio"
+        ],
+        [
+          "Burj Al Arab",
+          "monumento"
+        ],
+        [
+          "Palm Jumeirah",
+          "praia"
+        ],
+        [
+          "Dubai Marina",
+          "bairro"
+        ],
+        [
+          "Museu do Futuro",
+          "museu"
+        ],
+        [
+          "Mesquita Sheikh Zayed",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "cairo",
+      "nome": "Cairo e Egito",
+      "pais": "Egito",
+      "regiao": "mundo",
+      "codigos": [
+        "CAI"
+      ],
+      "airbnb": "Cairo--Egypt",
+      "capa": "Pirâmides de Gizé",
+      "lugares": [
+        [
+          "Pirâmides de Gizé",
+          "monumento"
+        ],
+        [
+          "Grande Esfinge de Gizé",
+          "monumento"
+        ],
+        [
+          "Grande Museu Egípcio",
+          "museu"
+        ],
+        [
+          "Khan el-Khalili",
+          "passeio"
+        ],
+        [
+          "Luxor",
+          "monumento"
+        ],
+        [
+          "Rio Nilo",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "bali",
+      "nome": "Bali",
+      "pais": "Indonésia",
+      "regiao": "mundo",
+      "codigos": [
+        "DPS"
+      ],
+      "airbnb": "Bali--Indonesia",
+      "capa": "Tanah Lot",
+      "lugares": [
+        [
+          "Tanah Lot",
+          "monumento"
+        ],
+        [
+          "Ubud",
+          "bairro"
+        ],
+        [
+          "Terraços de arroz de Tegallalang",
+          "natureza"
+        ],
+        [
+          "Uluwatu",
+          "monumento"
+        ],
+        [
+          "Floresta dos Macacos de Ubud",
+          "natureza"
+        ],
+        [
+          "Nusa Penida",
+          "praia"
+        ]
+      ]
+    },
+    {
+      "id": "seul",
+      "nome": "Seul",
+      "pais": "Coreia do Sul",
+      "regiao": "mundo",
+      "codigos": [
+        "SEL",
+        "ICN"
+      ],
+      "airbnb": "Seoul--South-Korea",
+      "capa": "Gyeongbokgung",
+      "lugares": [
+        [
+          "Gyeongbokgung",
+          "monumento"
+        ],
+        [
+          "Bukchon Hanok Village",
+          "bairro"
+        ],
+        [
+          "Myeongdong",
+          "bairro"
+        ],
+        [
+          "N Seoul Tower",
+          "monumento"
+        ],
+        [
+          "Gangnam",
+          "bairro"
+        ],
+        [
+          "Dongdaemun Design Plaza",
+          "monumento"
+        ]
+      ]
+    },
+    {
+      "id": "singapura",
+      "nome": "Singapura",
+      "pais": "Singapura",
+      "regiao": "mundo",
+      "codigos": [
+        "SIN"
+      ],
+      "airbnb": "Singapore",
+      "capa": "Marina Bay Sands",
+      "lugares": [
+        [
+          "Marina Bay Sands",
+          "monumento"
+        ],
+        [
+          "Gardens by the Bay",
+          "natureza"
+        ],
+        [
+          "Merlion",
+          "monumento"
+        ],
+        [
+          "Sentosa",
+          "praia"
+        ],
+        [
+          "Chinatown (Singapura)",
+          "bairro"
+        ],
+        [
+          "Jardim Botânico de Singapura",
+          "natureza"
+        ]
+      ]
+    },
+    {
+      "id": "auckland",
+      "nome": "Nova Zelândia",
+      "pais": "Nova Zelândia",
+      "regiao": "mundo",
+      "codigos": [
+        "AKL"
+      ],
+      "airbnb": "Auckland--New-Zealand",
+      "capa": "Milford Sound",
+      "lugares": [
+        [
+          "Sky Tower (Auckland)",
+          "monumento"
+        ],
+        [
+          "Hobbiton",
+          "passeio"
+        ],
+        [
+          "Milford Sound",
+          "natureza"
+        ],
+        [
+          "Queenstown",
+          "bairro"
+        ],
+        [
+          "Rotorua",
+          "natureza"
+        ],
+        [
+          "Waiheke Island",
+          "praia"
+        ]
+      ]
+    }
+  ]
+}

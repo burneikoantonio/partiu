@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Partiu">
+<meta name="theme-color" content="#eef6fd" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icone-180.png">
+<link rel="icon" href="icone-192.png">
+<title>Partiu</title>
+<style>
+:root{
+  --bg:#eef6fd;--campo:#dcebf7;--segOn:#fff;--card:#fff;--card2:#eef6fd;--txt:#000;--sec:#8e8e93;--sep:#c6c6c8;--verde:#42a9f5;--naVerde:#fff;--verdeFraco:#dff0fd;--vermelho:#ff3b30;--laranja:#ff9500;--barra:rgba(249,249,249,.94);
+}
+:root[data-tema="escuro"]{
+  --bg:#000;--campo:#1c1c1e;--segOn:#636366;--card:#1c1c1e;--card2:#2c2c2e;--txt:#fff;--sec:#8e8e93;--sep:#38383a;--verde:#5ab8f8;--naVerde:#fff;--verdeFraco:#0e2e47;--vermelho:#ff453a;--laranja:#ff9f0a;--barra:rgba(22,22,24,.94);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-tema="claro"]){--bg:#000;--campo:#1c1c1e;--segOn:#636366;--card:#1c1c1e;--card2:#2c2c2e;--txt:#fff;--sec:#8e8e93;--sep:#38383a;--verde:#5ab8f8;--naVerde:#fff;--verdeFraco:#0e2e47;--vermelho:#ff453a;--laranja:#ff9f0a;--barra:rgba(22,22,24,.94)}
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;font-size:16px}
+body{padding:env(safe-area-inset-top) 0 calc(70px + env(safe-area-inset-bottom))}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:var(--verde);text-decoration:none}
+.tela{max-width:720px;margin:0 auto;padding:0 16px 24px}
+h1{font-size:32px;font-weight:700;margin:12px 0 10px;letter-spacing:.2px}
+h2{font-size:20px;font-weight:600;margin:22px 0 8px}
+.sub{color:var(--sec);font-size:13px}
+.busca{display:flex;align-items:center;gap:6px;background:var(--campo);border-radius:10px;padding:8px 10px;color:var(--sec)}
+.busca input{flex:1;border:0;background:none;font:inherit;color:var(--txt);outline:none;min-width:0}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 4px;scrollbar-width:none;margin:0 -16px;padding-left:16px;padding-right:16px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:7px 13px;border-radius:18px;background:var(--card);font-size:14px;white-space:nowrap}
+.chip.on{background:var(--verde);color:var(--naVerde);font-weight:600}
+.chip small{display:block;font-size:11px;font-weight:400;opacity:.8}
+.linha{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ordem{font-size:14px;color:var(--verde);display:flex;align-items:center;gap:4px}
+select.ordem{border:0;background:none;font:inherit;font-size:14px;color:var(--verde);-webkit-appearance:none;appearance:none;text-align:right}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:10px}
+.card{background:var(--card);border-radius:16px;padding:8px;display:flex;flex-direction:column;position:relative;text-align:left}
+.foto{background:var(--card2);border-radius:12px;aspect-ratio:4/3;overflow:hidden}
+.foto img{width:100%;height:100%;object-fit:cover;display:block}
+/* sem foto: um aviãozinho azul no lugar */
+.foto:not(:has(img)),.capa:not(:has(img)){background:var(--verdeFraco) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2342a9f5' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.5 13.5L3 11l1.5-1.5 7.5 1 4.5-4.5c1-1 2.6-1.3 3.3-.6.7.7.4 2.3-.6 3.3L14.7 13l1 7.5L14.2 22l-2.5-7.5-3 3V20l-1.5 1.5-1-3.5-3.5-1L4.2 15.5h2.3z'/%3E%3C/svg%3E") center/34% no-repeat}
+.card .nome{font-size:15px;font-weight:600;line-height:1.25;margin:7px 2px 0}
+.card .loja{font-size:12px;color:var(--sec);margin:1px 2px 0}
+.card .preco{font-size:16px;font-weight:600;margin:6px 2px 0}
+.card .preco small{font-size:12px;color:var(--sec);font-weight:400}
+.selo{position:absolute;top:12px;left:12px;background:var(--verde);color:var(--naVerde);font-size:11px;font-weight:600;border-radius:8px;padding:2px 7px}
+.coracao{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:17px;background:rgba(255,255,255,.88);color:#8e8e93;display:flex;align-items:center;justify-content:center;z-index:2}
+.coracao svg{width:20px;height:20px}
+.coracao.on{color:var(--verde)}
+.selo.cinza{background:rgba(0,0,0,.55);color:#fff}
+.mais{display:block;width:100%;margin:16px 0;padding:12px;border-radius:12px;background:var(--card);color:var(--verde);font-weight:600;text-align:center}
+.vazio{text-align:center;color:var(--sec);padding:40px 10px}
+.topo{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;align-items:center;justify-content:space-between;padding:10px 0;margin:0 -16px;padding-left:10px;padding-right:16px}
+.voltar{color:var(--verde);font-size:17px;display:flex;align-items:center;gap:2px}
+.capa{border-radius:18px;aspect-ratio:16/10;max-height:380px;width:100%;overflow:hidden;background:var(--card2);position:relative}
+.capa img{width:100%;height:100%;object-fit:cover;display:block}
+.capa .sobre{position:absolute;left:0;right:0;bottom:0;padding:40px 16px 14px;background:linear-gradient(transparent,rgba(0,0,0,.65));color:#fff}
+.capa .sobre b{font-size:26px;display:block;line-height:1.15}
+.titulo{font-size:19px;font-weight:600;line-height:1.3;margin:14px 0 6px}
+.precoGrande{font-size:30px;font-weight:700}
+.grupo{background:var(--card);border-radius:12px;overflow:hidden;margin-top:8px}
+.item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:.5px solid var(--sep);font-size:15px;min-height:44px;width:100%;text-align:left}
+.item:last-child{border-bottom:0}
+.item .dir{text-align:right;white-space:nowrap}
+.item.barato .dir{color:var(--verde);font-weight:600}
+.item small{color:var(--sec);font-size:12px;display:block;font-weight:400}
+.acoes{display:flex;gap:8px;margin-top:16px}
+.btn{background:var(--verde);color:var(--naVerde);border-radius:14px;padding:14px 16px;font-weight:600;font-size:16px;display:flex;align-items:center;justify-content:center;gap:6px;text-align:center}
+.btn.cheio{flex:1}
+.btn svg{width:22px;height:22px}
+.btn.fraco{background:var(--verdeFraco);color:var(--verde)}
+.texto{background:var(--card);border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.45}
+.aviso{background:var(--verdeFraco);color:var(--txt);border-radius:12px;padding:10px 12px;font-size:14px;margin-top:10px;line-height:1.4}
+.aviso.ruim{background:rgba(255,59,48,.12)}
+.aviso.neutro{background:var(--card)}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--barra);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:.5px solid var(--sep);display:flex;justify-content:space-around;padding:6px 0 calc(6px + env(safe-area-inset-bottom));z-index:10}
+nav button{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:var(--sec);min-width:64px}
+nav button svg{width:26px;height:26px}
+nav button.on{color:var(--verde)}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);background:rgba(30,30,30,.92);color:#fff;padding:10px 16px;border-radius:20px;font-size:14px;z-index:20;opacity:0;transition:opacity .2s;pointer-events:none;max-width:90%;text-align:center}
+.toast.on{opacity:1}
+.seg{display:flex;background:var(--campo);border-radius:9px;padding:2px}
+.seg button{flex:1;padding:7px 6px;border-radius:7px;font-size:14px}
+.seg button.on{background:var(--segOn);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.texto .seg{background:var(--card2)}
+input.campo,select.campo{width:100%;border:0;background:var(--card);border-radius:10px;padding:12px;font:inherit;color:var(--txt);outline:none;-webkit-appearance:none;appearance:none;min-height:46px}
+.form{background:var(--card);border-radius:14px;overflow:hidden}
+.form .item{min-height:52px}
+.form input[type=date]{border:0;background:var(--card2);border-radius:8px;padding:7px 8px;font:inherit;font-size:15px;color:var(--txt);min-width:0}
+.stepper{display:flex;align-items:center;gap:12px}
+.stepper button{width:34px;height:34px;border-radius:17px;background:var(--card2);font-size:20px;font-weight:600;color:var(--verde)}
+.troca{width:51px;height:31px;border-radius:16px;background:var(--campo);position:relative;flex:none;transition:background .2s}
+.troca::after{content:'';position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:14px;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2);transition:left .2s}
+.troca.on{background:var(--verde)}
+.troca.on::after{left:22px}
+.sugestoes{background:var(--card);border-radius:12px;margin-top:6px;overflow:hidden}
+/* calendário */
+.cal{background:var(--card);border-radius:14px;padding:10px}
+.cal .sem{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:11px;color:var(--sec);margin-bottom:4px}
+.cal .dias{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.dia{border-radius:9px;padding:6px 0 5px;text-align:center;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--card2)}
+.dia b{font-size:14px;font-weight:600}
+.dia span{font-size:10px;color:var(--sec);margin-top:1px;white-space:nowrap}
+.dia.vazio{background:none}
+.dia.sem-preco{opacity:.35}
+.dia.n1{background:var(--verdeFraco)}
+.dia.n1 span{color:var(--verde);font-weight:600}
+.dia.on{background:var(--verde);color:var(--naVerde)}
+.dia.on span{color:var(--naVerde)}
+.legenda{display:flex;gap:12px;font-size:12px;color:var(--sec);margin-top:8px;align-items:center}
+.legenda i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+/* hospedagem e lugares */
+.hosp{background:var(--card);border-radius:14px;overflow:hidden;margin-top:10px;display:block;color:inherit}
+.hosp .foto{border-radius:0;aspect-ratio:16/9}
+.hosp .info{padding:10px 12px 12px}
+.hosp .tag{display:inline-block;font-size:11px;font-weight:600;border-radius:6px;padding:2px 6px;background:var(--card2);color:var(--sec);margin-right:4px}
+.hosp .tag.verde{background:var(--verde);color:var(--naVerde)}
+.hosp .tag.laranja{background:rgba(255,149,0,.15);color:var(--laranja)}
+.hosp .n{font-size:16px;font-weight:600;line-height:1.3;margin-top:6px}
+.hosp .det{font-size:13px;color:var(--sec);margin-top:2px}
+.hosp .pr{display:flex;justify-content:space-between;align-items:flex-end;margin-top:8px}
+.hosp .pr b{font-size:18px}
+.lugar{background:var(--card);border-radius:14px;overflow:hidden;margin-top:10px;display:flex;gap:12px;padding:10px;align-items:flex-start}
+.lugar .foto{width:96px;height:96px;flex:none;aspect-ratio:auto;border-radius:10px}
+.lugar .n{font-weight:600;font-size:16px}
+.lugar .t{font-size:13px;color:var(--sec);line-height:1.4;margin-top:3px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.lugar.aberto .t{-webkit-line-clamp:unset}
+.lugar .bts{display:flex;gap:14px;margin-top:6px;font-size:14px;font-weight:600}
+.quero{color:var(--sec)}
+.quero.on{color:var(--verde)}
+.total{background:var(--card);border-radius:16px;padding:14px 16px;margin-top:10px}
+.total .lin{display:flex;justify-content:space-between;font-size:15px;padding:4px 0}
+.total .lin.soma{border-top:.5px solid var(--sep);margin-top:6px;padding-top:10px;font-weight:700;font-size:18px}
+.esqueleto{background:var(--card);border-radius:16px;aspect-ratio:3/4;opacity:.6}
+.peca{background:var(--card);border-radius:14px;padding:10px;display:flex;gap:10px;align-items:flex-start;margin-top:8px}
+.peca .foto{width:64px;height:64px;flex:none;border-radius:10px;aspect-ratio:auto}
+.peca .info{flex:1;min-width:0}
+.peca .rotulo{font-size:12px;color:var(--verde);font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.peca .nm{font-size:15px;font-weight:600;line-height:1.3}
+.peca .serve{font-size:13px;color:var(--sec);margin-top:3px;line-height:1.35}
+.peca .pr{font-weight:600;font-size:15px;white-space:nowrap;text-align:right}
+.peca .acao{font-size:13px;color:var(--verde);font-weight:600;margin-top:6px}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<nav id="abas"></nav>
+<div class="toast" id="toast"></div>
+<script>
+// Ícones (desenhos simples, estilo iOS)
+const I = {
+  aviao: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 13.5L3 11l1.5-1.5 7.5 1 4.5-4.5c1-1 2.6-1.3 3.3-.6.7.7.4 2.3-.6 3.3L14.7 13l1 7.5L14.2 22l-2.5-7.5-3 3V20l-1.5 1.5-1-3.5-3.5-1L4.2 15.5h2.3z"/></svg>',
+  mapa: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5z"/><path d="M9 4v13.5M15 6.5V20"/></svg>',
+  sino: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>',
+  coracao: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.4 4.5 7 4.5c2.1 0 3.6 1.2 5 3 1.4-1.8 2.9-3 5-3 3.6 0 5.6 3.5 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg>',
+  coracaoCheio: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.4 4.5 7 4.5c2.1 0 3.6 1.2 5 3 1.4-1.8 2.9-3 5-3 3.6 0 5.6 3.5 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg>',
+  sinoCheio: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0" fill="none"/></svg>',
+  pessoa: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>',
+  juntos: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.4 3.4-5.5 6.5-5.5s5.7 2.1 6.5 5.5"/><circle cx="17" cy="9" r="2.8"/><path d="M17 14.5c2.4 0 4.2 1.7 4.8 4.5"/></svg>',
+  lupa: '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>',
+  voltar: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+  compartilhar: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>',
+  seta: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>',
+  check: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
+};
+
+const brl = v => v == null ? '' : 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const norm = s => String(s || '').normalize('NFD').replace(/\p{Mn}/gu, '').toLowerCase();
+const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+const MES3 = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+const iso = d => d.toLocaleDateString('sv-SE');
+const dt = s => new Date(s + 'T12:00:00');
+const somaDias = (s, n) => { const d = dt(s); d.setDate(d.getDate() + n); return iso(d); };
+const difDias = (a, b) => Math.round((dt(b) - dt(a)) / 864e5);
+const dataCurta = s => { const d = dt(s); return `${d.getDate()} ${MES3[d.getMonth()]}`; };
+const SEMANA = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+const AEROPORTO = { GRU: 'Guarulhos', CGH: 'Congonhas', VCP: 'Viracopos' };
+const DURS = [3, 7, 14];
+// mala despachada de 23 kg, ida e volta, por pessoa (estimativa: as companhias cobram por trecho)
+const MALA = { brasil: 300, sul: 450, norte: 800, europa: 800, mundo: 900 };
+
+// ---------- estado salvo no aparelho ----------
+const CHAVE = 'viagens.v1';
+let S = {};
+try { S = JSON.parse(localStorage.getItem(CHAVE)) || {}; } catch (e) {}
+S.alertas ||= {}; S.curtidas ||= {}; S.curtHosp ||= {}; S.tema ||= 'auto'; S.pessoas ||= 2; S.mala ??= false; S.modo ||= 'flex'; S.dur ||= 7; S.quero ||= {}; S.recentes ||= []; S.regiao ||= '';
+S.hosp ||= { tipo: 'tudo', faixa: '', ordem: 'cb' };
+const salvar = () => { try { localStorage.setItem(CHAVE, JSON.stringify(S)); } catch (e) {} };
+function aplicarTema() {
+  if (S.tema === 'auto') document.documentElement.removeAttribute('data-tema');
+  else document.documentElement.setAttribute('data-tema', S.tema);
+}
+aplicarTema();
+
+let CFG, RES = {}, HOSP = { destinos: {} }, LUG = {}, INFO = {}, HIST = null;
+const DEST = new Map(), VOOS = new Map();
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(t._x); t._x = setTimeout(() => t.classList.remove('on'), 2400);
+}
+
+async function carregar() {
+  const v = '?v=' + Math.floor(Date.now() / 600000); // renova a cada 10 minutos
+  const j = u => fetch(u + v).then(r => r.ok ? r.json() : {}).catch(() => ({}));
+  [CFG, RES, HOSP, LUG, INFO] = await Promise.all([j('destinos.json'), j('data/resumo.json'), j('data/hospedagem.json'), j('data/lugares.json'), j('data/info.json')]);
+  if (!CFG.destinos) throw new Error('sem destinos');
+  HOSP.destinos ||= {};
+  for (const d of CFG.destinos) DEST.set(d.id, d);
+}
+async function voos(id) {
+  if (!VOOS.has(id)) VOOS.set(id, await fetch(`data/voos/${id}.json?v=${Math.floor(Date.now() / 600000)}`).then(r => r.json()).catch(() => ({})));
+  return VOOS.get(id);
+}
+async function historico() {
+  if (!HIST) HIST = await fetch('data/historico.json?v=' + Math.floor(Date.now() / 600000)).then(r => r.json()).catch(() => ({}));
+  return HIST;
+}
+const foto = nome => LUG[nome]?.img || '';
+const capa = d => foto(d.capa) || foto(d.lugares[0][0]);
+
+// ---------- navegação ----------
+let ABA = 'buscar';
+const PILHA = [];
+function abas() {
+  const b = (id, ic, nome) => `<button class="${ABA === id ? 'on' : ''}" onclick="irAba('${id}')">${ic}<span>${nome}</span></button>`;
+  document.getElementById('abas').innerHTML = b('buscar', I.aviao, 'Passagens') + b('destinos', I.mapa, 'Destinos') + b('curtidas', I.coracao, 'Curtidas') + b('juntos', I.juntos, 'Juntos') + b('perfil', I.pessoa, 'Perfil');
+}
+function irAba(id) {
+  ABA = id; PILHA.length = 0;
+  const alvo = id === 'buscar' ? '' : '#' + id;
+  if (location.hash !== alvo) history.pushState(null, '', alvo || location.pathname + location.search);
+  desenhar(); scrollTo(0, 0);
+}
+function abrir(id, parte) {
+  PILHA.push({ hash: location.hash, y: scrollY });
+  location.hash = 'destino=' + encodeURIComponent(id) + (parte ? '&' + parte : '');
+}
+function voltar() {
+  if (PILHA.length) history.back();
+  else location.hash = ABA === 'buscar' ? '' : ABA;
+}
+window.addEventListener('hashchange', rota);
+function rota() {
+  const topo = PILHA[PILHA.length - 1];
+  const volta = topo && topo.hash === location.hash;
+  if (volta) PILHA.pop();
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (h.startsWith('destino=')) {
+    const [id, parte] = h.slice(8).split('&');
+    telaDestino(id, parte, volta);
+  } else {
+    if (h.startsWith('entrar=')) { entrarGrupo(h.slice(7)); history.replaceState(null, '', '#juntos'); ABA = 'juntos'; }
+    else if (['destinos', 'curtidas', 'juntos', 'perfil'].includes(h)) ABA = h;
+    else if (h === 'avisos') ABA = 'curtidas';
+    else if (!h) ABA = 'buscar';
+    desenhar();
+  }
+  if (volta) requestAnimationFrame(() => scrollTo(0, topo.y));
+}
+navigator.serviceWorker?.addEventListener('message', e => { if (e.data?.abrir) location.href = e.data.abrir; });
+
+function desenhar() {
+  abas();
+  if (ABA === 'destinos') return telaDestinos();
+  if (ABA === 'curtidas') return telaCurtidas();
+  if (ABA === 'juntos') return telaJuntos();
+  if (ABA === 'perfil') return telaPerfil();
+  telaBuscar();
+}
+
+// ---------- busca ----------
+function sugestoes(q) {
+  q = norm(q).trim();
+  if (!q) return [];
+  // primeiro quem tem o nome buscado (cidade, país, estado); depois quem tem um lugar com esse nome
+  const nome = d => norm(d.nome + ' ' + d.pais + ' ' + (d.uf || ''));
+  const peso = d => norm(d.nome).startsWith(q) ? 0 : nome(d).includes(q) ? 1 : 2;
+  return CFG.destinos.filter(d => peso(d) < 2 || norm(d.lugares.map(l => l[0]).join(' ')).includes(q))
+    .sort((a, b) => peso(a) - peso(b)).slice(0, 8);
+}
+function telaBuscar() {
+  const d = DEST.get(S.destino);
+  const hoje = iso(new Date());
+  S.ida ||= somaDias(hoje, 30); S.volta ||= somaDias(S.ida, 7);
+  const meses = proximosMeses(6);
+  document.getElementById('app').innerHTML = `<div class="tela">
+    <h1 style="display:flex;align-items:center;gap:10px"><img src="logo.png" alt="" style="width:38px;height:38px;border-radius:50%;background:#fff">Partiu</h1>
+    <div class="sub" style="margin:-6px 0 12px">Saindo de São Paulo: Guarulhos, Congonhas ou Viracopos</div>
+    <label class="busca">${I.lupa}<input id="qDest" type="search" placeholder="Para onde? Cidade, país ou lugar" value="${esc(d ? d.nome : '')}" oninput="mostrarSug(this.value)" autocomplete="off"></label>
+    <div id="sug"></div>
+    <h2 style="font-size:17px">Quando</h2>
+    <div class="seg"><button class="${S.modo === 'exato' ? 'on' : ''}" onclick="S.modo='exato';salvar();telaBuscar()">Datas exatas</button><button class="${S.modo === 'flex' ? 'on' : ''}" onclick="S.modo='flex';salvar();telaBuscar()">Datas flexíveis</button></div>
+    ${S.modo === 'exato' ? `<div class="form" style="margin-top:10px">
+      <div class="item"><span>Ida</span><input type="date" min="${hoje}" value="${S.ida}" onchange="S.ida=this.value;if(S.volta<=S.ida)S.volta=somaDias(S.ida,7);salvar();telaBuscar()"></div>
+      <div class="item"><span>Volta</span><input type="date" min="${somaDias(S.ida, 1)}" value="${S.volta}" onchange="S.volta=this.value;salvar();telaBuscar()"></div>
+    </div><div class="sub" style="margin-top:6px">${difDias(S.ida, S.volta)} noites</div>`
+    : `<div class="sub" style="margin-top:12px">Quantos dias de viagem?</div>
+      <div class="chips" style="padding-top:6px">${DURS.map(n => `<button class="chip ${S.dur === n ? 'on' : ''}" onclick="S.dur=${n};salvar();telaBuscar()">${n === 3 ? 'Fim de semana (3)' : n === 7 ? '1 semana (7)' : '2 semanas (14)'}</button>`).join('')}</div>
+      <div class="sub" style="margin-top:8px">Em qual mês? (o app mostra o dia mais barato)</div>
+      <div class="chips" style="padding-top:6px"><button class="chip ${!S.mes ? 'on' : ''}" onclick="S.mes='';salvar();telaBuscar()">Qualquer</button>${meses.map(m => `<button class="chip ${S.mes === m ? 'on' : ''}" onclick="S.mes='${m}';salvar();telaBuscar()">${MESES[+m.slice(5) - 1]}</button>`).join('')}</div>`}
+    <h2 style="font-size:17px">Quem vai</h2>
+    <div class="form">
+      <div class="item"><span>Pessoas<small>preço total do grupo</small></span><span class="stepper"><button onclick="S.pessoas=Math.max(1,S.pessoas-1);salvar();telaBuscar()">−</button><b>${S.pessoas}</b><button onclick="S.pessoas=Math.min(9,S.pessoas+1);salvar();telaBuscar()">+</button></span></div>
+      <div class="item" onclick="S.mala=!S.mala;salvar();telaBuscar()"><span>Mala despachada<small>soma uma mala de 23 kg por pessoa</small></span><span class="troca ${S.mala ? 'on' : ''}"></span></div>
+    </div>
+    <button class="btn" style="width:100%;margin-top:18px" onclick="buscar()">${I.lupa} Buscar passagens</button>
+    ${S.recentes.length ? `<h2>Buscas recentes</h2><div class="grupo">${S.recentes.filter(id => DEST.has(id)).map(id => { const x = DEST.get(id), r = RES[id] || {}; return `<button class="item" onclick="S.destino='${id}';salvar();abrir('${id}')"><span>${esc(x.nome)}<small>${esc(x.pais)}</small></span><span class="dir">${r.min ? 'a partir de ' + brl(r.min) : ''}</span></button>`; }).join('')}</div>` : ''}
+  </div>`;
+}
+function proximosMeses(n) {
+  const d = new Date(); d.setDate(1);
+  return Array.from({ length: n }, (_, i) => { const x = new Date(d.getFullYear(), d.getMonth() + i, 1); return iso(x).slice(0, 7); });
+}
+function mostrarSug(q) {
+  const l = sugestoes(q);
+  document.getElementById('sug').innerHTML = l.length ? `<div class="sugestoes">${l.map(d => `<button class="item" onclick="escolher('${d.id}')"><span>${esc(d.nome)}<small>${esc(d.uf ? d.uf + ' · Brasil' : d.pais)}</small></span><span class="dir sub">${RES[d.id]?.min ? 'desde ' + brl(RES[d.id].min) : ''}</span></button>`).join('')}</div>`
+    : q.trim() ? `<div class="sub" style="padding:8px 4px">Ainda não temos esse destino. Veja a lista na aba Destinos.</div>` : '';
+}
+function escolher(id) { S.destino = id; salvar(); document.getElementById('qDest').value = DEST.get(id).nome; document.getElementById('sug').innerHTML = ''; }
+function buscar() {
+  if (!S.destino) { document.getElementById('qDest').focus(); return toast('Escolha para onde'); }
+  if (S.modo === 'exato' && S.volta <= S.ida) return toast('A volta precisa ser depois da ida');
+  S.recentes = [S.destino, ...S.recentes.filter(x => x !== S.destino)].slice(0, 6);
+  S.sel = null; salvar();
+  abrir(S.destino);
+}
+
+// ---------- destinos ----------
+function telaDestinos() {
+  const q = norm(S.filtro);
+  let l = CFG.destinos.filter(d => (!S.regiao || d.regiao === S.regiao) && (!q || norm(d.nome + ' ' + d.pais).includes(q)));
+  const ord = S.ordemDest || 'preco';
+  l = l.slice().sort(ord === 'preco' ? (a, b) => (RES[a.id]?.min || 1e9) - (RES[b.id]?.min || 1e9) : (a, b) => a.nome.localeCompare(b.nome));
+  document.getElementById('app').innerHTML = `<div class="tela">
+    <div class="linha"><h1>Destinos</h1><select class="ordem" onchange="S.ordemDest=this.value;salvar();telaDestinos()"><option value="preco" ${ord === 'preco' ? 'selected' : ''}>Menor preço</option><option value="nome" ${ord === 'nome' ? 'selected' : ''}>A a Z</option></select></div>
+    <label class="busca">${I.lupa}<input type="search" placeholder="Filtrar destinos" value="${esc(S.filtro || '')}" oninput="S.filtro=this.value;clearTimeout(window._f);window._f=setTimeout(()=>{telaDestinos();const i=document.querySelector('.busca input');i.focus();i.setSelectionRange(99,99)},250)"></label>
+    <div class="chips"><button class="chip ${!S.regiao ? 'on' : ''}" onclick="S.regiao='';salvar();telaDestinos()">Todos</button>${CFG.regioes.map(r => `<button class="chip ${S.regiao === r.id ? 'on' : ''}" onclick="S.regiao='${r.id}';salvar();telaDestinos()">${r.nome}</button>`).join('')}</div>
+    <div class="sub" style="margin-top:6px">Ida e volta por pessoa, o menor preço dos próximos meses${INFO.atualizado ? ' · ' + new Date(INFO.atualizado).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : ''}</div>
+    <div class="grade">${l.map(cartaoDestino).join('') || '<div class="vazio">Nada encontrado.</div>'}</div>
+  </div>`;
+}
+function cartaoDestino(d) {
+  const r = RES[d.id] || {};
+  const caiu = r.antes && r.min < r.antes * 0.95;
+  const on = !!S.curtidas[d.id];
+  return `<div class="card" role="button" onclick="S.destino='${d.id}';salvar();abrir('${d.id}')">
+    <div class="foto">${capa(d) ? `<img loading="lazy" src="${esc(capa(d))}" alt="" onerror="this.remove()">` : ''}</div>
+    ${caiu ? `<span class="selo">baixou ${Math.round((1 - r.min / r.antes) * 100)}%</span>` : ''}
+    <button class="coracao ${on ? 'on' : ''}" aria-label="Curtir" onclick="event.stopPropagation();curtir('${d.id}',this)">${on ? I.coracaoCheio : I.coracao}</button>
+    <div class="nome">${esc(d.nome)}</div>
+    <div class="loja">${esc(d.uf ? d.uf : d.pais)}</div>
+    <div class="preco">${r.min ? `<small>a partir de</small> ${brl(r.min)}` : '<small>sem preço agora</small>'}</div>
+  </div>`;
+}
+
+// ---------- curtidas ----------
+function curtir(id, el) {
+  if (S.curtidas[id]) { delete S.curtidas[id]; toast('Removido das Curtidas'); }
+  else { S.curtidas[id] = { base: RES[id]?.min || null, em: Date.now() }; toast('Curtido. Você recebe aviso se a passagem baixar.'); }
+  salvar(); sincronizar();
+  if (el) { const on = !!S.curtidas[id]; el.classList.toggle('on', on); el.innerHTML = on ? I.coracaoCheio : I.coracao; }
+}
+function chaveHosp(x) { return x.fonte + ':' + (x.id || x.n); }
+function curtirHosp(dest, chave, el) {
+  if (S.curtHosp[chave]) { delete S.curtHosp[chave]; toast('Removido das Curtidas'); }
+  else {
+    const x = listaHosp(dest).find(y => chaveHosp(y) === chave);
+    if (!x) return;
+    S.curtHosp[chave] = { dest, fonte: x.fonte, id: x.id, n: x.n, img: x.img, p: x.p, nota: x.nota, url: x.url, em: Date.now() };
+    toast('Hospedagem curtida');
+  }
+  salvar();
+  if (el) { const on = !!S.curtHosp[chave]; el.classList.toggle('on', on); el.innerHTML = on ? I.coracaoCheio : I.coracao; }
+}
+function telaCurtidas() {
+  const dests = Object.keys(S.curtidas).filter(id => DEST.has(id)).sort((a, b) => S.curtidas[b].em - S.curtidas[a].em);
+  const hosp = Object.entries(S.curtHosp).sort((a, b) => b[1].em - a[1].em);
+  const avisos = Object.keys(S.alertas).filter(id => DEST.has(id));
+  const linhaDest = id => {
+    const d = DEST.get(id), r = RES[id] || {}, base = S.curtidas[id].base;
+    const mudou = r.min && base && Math.abs(r.min - base) >= 10 ? (r.min < base ? `<small style="color:var(--verde)">baixou ${brl(base - r.min)}</small>` : `<small>subiu ${brl(r.min - base)}</small>`) : '';
+    return `<button class="item" onclick="abrir('${id}')"><span style="display:flex;gap:10px;align-items:center;min-width:0">
+      <span class="foto" style="width:52px;height:52px;flex:none;border-radius:9px;aspect-ratio:auto">${capa(d) ? `<img src="${esc(capa(d))}" alt="">` : ''}</span>
+      <span style="min-width:0">${esc(d.nome)}<small>${esc(d.uf ? d.uf + ' · Brasil' : d.pais)}</small></span></span>
+      <span class="dir">${r.min ? brl(r.min) : '-'}${mudou}</span></button>`;
+  };
+  const linhaHosp = ([k, x]) => {
+    const d = DEST.get(x.dest);
+    const atual = listaHosp(x.dest).find(y => chaveHosp(y) === k);
+    const p = atual ? atual.p : x.p;
+    return `<button class="item" onclick="PARTE='hosp';abrir('${x.dest}','hosp')"><span style="display:flex;gap:10px;align-items:center;min-width:0">
+      <span class="foto" style="width:52px;height:52px;flex:none;border-radius:9px;aspect-ratio:auto">${x.img ? `<img src="${esc(x.img)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}</span>
+      <span style="min-width:0;overflow:hidden"><span style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${esc(x.n)}</span><small>${x.fonte === 'airbnb' ? 'Airbnb' : 'Hotel'} · ${esc(d ? d.nome : '')}</small></span></span>
+      <span class="dir">${brl(p)}<small>por noite</small></span></button>`;
+  };
+  document.getElementById('app').innerHTML = `<div class="tela"><h1>Curtidas</h1>
+    ${!S.push ? `<div class="aviso">Ative as notificações no <a href="#perfil">Perfil</a> para saber quando a passagem de um destino curtido baixar.</div>` : ''}
+    <h2>Destinos</h2>
+    ${dests.length ? `<div class="grupo">${dests.map(linhaDest).join('')}</div>` : `<div class="texto sub">Toque no coração de um destino para guardar aqui. Você recebe aviso quando a passagem baixar.</div>`}
+    <h2>Hospedagens</h2>
+    ${hosp.length ? `<div class="grupo">${hosp.map(linhaHosp).join('')}</div>` : `<div class="texto sub">Toque no coração de um hotel ou Airbnb para guardar aqui.</div>`}
+    <h2>Avisos de preço</h2>
+    ${avisos.length ? avisos.map(id => {
+      const d = DEST.get(id), a = S.alertas[id], r = RES[id] || {};
+      const agora = a.mes && r.meses ? r.meses[a.mes] : r.min;
+      const bom = a.max && agora && agora <= a.max;
+      return `<div class="peca" onclick="abrir('${id}')">
+        <div class="foto">${capa(d) ? `<img src="${esc(capa(d))}" alt="">` : ''}</div>
+        <div class="info"><div class="nm">${esc(d.nome)}</div>
+          <div class="serve">${a.max ? `Avisar abaixo de ${brl(a.max)}` : 'Avisar quando baixar'}${a.mes ? ` · em ${MESES[+a.mes.slice(5) - 1]}` : ''}${a.dur ? ` · viagens de ${a.dur} dias` : ''}</div>
+          <button class="acao" style="color:var(--sec)" onclick="event.stopPropagation();criarAviso('${id}')">Desligar</button></div>
+        <div class="pr" style="${bom ? 'color:var(--verde)' : ''}">${agora ? brl(agora) : '-'}<div class="sub" style="font-weight:400">${bom ? 'chegou no seu preço' : 'hoje'}</div></div>
+      </div>`; }).join('') : `<div class="texto sub">Abra um destino e toque no sino para escolher um preço: o app avisa quando a passagem chegar nele.</div>`}
+  </div>`;
+}
+
+// ---------- tela do destino ----------
+let PARTE = 'voos';
+async function telaDestino(id, parte, manterScroll) {
+  const d = DEST.get(id);
+  abas();
+  const app = document.getElementById('app');
+  if (!d) { app.innerHTML = `<div class="tela"><div class="topo"><button class="voltar" onclick="voltar()">${I.voltar} Voltar</button></div><div class="vazio">Destino não encontrado.</div></div>`; return; }
+  if (parte) PARTE = parte;
+  S.destino = id; salvar();
+  const r = RES[id] || {};
+  const v = await voos(id);
+  const viagem = escolherViagem(d, v);
+  const alerta = S.alertas[id];
+  app.innerHTML = `<div class="tela">
+    <div class="topo"><button class="voltar" onclick="voltar()">${I.voltar} Voltar</button>
+      <span style="display:flex;gap:18px;align-items:center">
+        <button style="color:var(--verde)" aria-label="Curtir" onclick="curtir('${id}',this)">${(S.curtidas[id] ? I.coracaoCheio : I.coracao).replace('<svg', '<svg width="23" height="23"')}</button>
+        <button style="color:var(--verde)" aria-label="Avisar quando baixar" onclick="criarAviso('${id}')">${alerta ? I.sinoCheio.replace('<svg', '<svg width="22" height="22"') : I.sino.replace('<svg', '<svg width="22" height="22"')}</button>
+        <button style="color:var(--verde)" onclick="compartilhar('${id}')" aria-label="Compartilhar">${I.compartilhar}</button></span></div>
+    <div class="capa">${capa(d) ? `<img src="${esc(capa(d))}" alt="">` : ''}<div class="sobre"><b>${esc(d.nome)}</b>${esc(d.uf ? d.uf + ' · Brasil' : d.pais)}</div></div>
+    ${resumoViagem(d, viagem)}
+    <div class="seg" style="margin-top:16px">${[['voos', 'Passagens'], ['hosp', 'Hospedagem'], ['lugares', 'Lugares']].map(([k, n]) => `<button class="${PARTE === k ? 'on' : ''}" onclick="PARTE='${k}';telaDestino('${id}',null,true)">${n}</button>`).join('')}</div>
+    <div id="parte">${PARTE === 'voos' ? parteVoos(d, v, viagem) : PARTE === 'hosp' ? parteHosp(d, viagem) : parteLugares(d)}</div>
+  </div>`;
+  if (!manterScroll) scrollTo(0, 0);
+}
+
+// qual viagem mostrar: a data que a pessoa escolheu, o dia tocado no calendário ou o dia mais barato
+function escolherViagem(d, v) {
+  const cal = k => v['d' + k] || {};
+  if (S.sel && S.sel.dest === d.id && cal(S.sel.dur)[S.sel.ida]) return { ida: S.sel.ida, dur: S.sel.dur, x: cal(S.sel.dur)[S.sel.ida] };
+  if (S.modo === 'exato' && S.ida && S.volta) {
+    const noites = difDias(S.ida, S.volta);
+    const dur = DURS.reduce((a, b) => Math.abs(b - noites) < Math.abs(a - noites) ? b : a);
+    const x = cal(dur)[S.ida];
+    return { ida: S.ida, dur: noites, durRef: dur, x, exato: true };
+  }
+  const dur = S.dur || 7;
+  const dias = Object.entries(cal(dur)).filter(([dia]) => !S.mes || dia.startsWith(S.mes));
+  if (!dias.length) return { dur };
+  const [ida, x] = dias.reduce((a, b) => b[1][0] < a[1][0] ? b : a);
+  return { ida, dur, x, maisBarato: true };
+}
+const volta = vg => somaDias(vg.ida, vg.dur);
+
+function resumoViagem(d, vg) {
+  if (!vg.x && !vg.exato) return `<div class="aviso neutro" style="margin-top:12px">Sem preço de passagem para este destino agora. O robô tenta de novo na próxima atualização.</div>`;
+  const n = S.pessoas;
+  const pass = vg.x ? vg.x[0] * n : null;
+  const mala = S.mala ? MALA[d.regiao] * n : 0;
+  const h = melhorHosp(d.id);
+  const noites = vg.dur;
+  const quartos = Math.ceil(n / 2);
+  const hospTotal = h ? (h.fonte === 'hotel' ? h.p * quartos : h.p * (n > 2 ? Math.ceil(n / 2) : 1)) * noites : null;
+  return `<div class="total">
+    <div class="sub">${vg.maisBarato ? 'Dia mais barato' : 'Sua viagem'} · ${n} ${n > 1 ? 'pessoas' : 'pessoa'}</div>
+    <div style="font-size:17px;font-weight:600;margin-top:2px">${vg.ida ? `${dataCurta(vg.ida)} → ${dataCurta(volta(vg))} · ${noites} noites` : ''}</div>
+    <div class="lin" style="margin-top:6px"><span>Passagens${n > 1 ? ` (${n}× ${vg.x ? brl(vg.x[0]) : '-'})` : ''}</span><b>${pass ? brl(pass) : '<span class="sub">ver no site</span>'}</b></div>
+    ${S.mala ? `<div class="lin"><span>Malas despachadas <small class="sub">(estimativa)</small></span><b>${brl(mala)}</b></div>` : ''}
+    ${h ? `<div class="lin"><span>Hospedagem<small class="sub" style="display:block">${h.fonte === 'hotel' ? 'hotel' : 'Airbnb'} com melhor custo-benefício</small></span><b style="white-space:nowrap">${brl(hospTotal)}</b></div>` : ''}
+    <div class="lin soma"><span>Total estimado</span><span>${pass ? brl(pass + mala + (hospTotal || 0)) : '-'}</span></div>
+    <div class="sub" style="margin-top:4px">${pass ? `${brl((pass + mala + (hospTotal || 0)) / n)} por pessoa` : ''}</div>
+  </div>`;
+}
+
+function parteVoos(d, v, vg) {
+  const n = S.pessoas;
+  const dur = vg.durRef || vg.dur || S.dur || 7;
+  const cal = v['d' + dur] || {};
+  const meses = [...new Set(Object.keys(cal).map(x => x.slice(0, 7)))];
+  const mes = (vg.ida && vg.ida.slice(0, 7)) || S.mesCal || meses[0];
+  S.mesCal = mes;
+  const x = vg.x;
+  const mala = MALA[d.regiao];
+  let det = '';
+  if (vg.ida) {
+    const kayak = `https://www.kayak.com.br/flights/SAO-${d.codigos[0]}/${vg.ida}/${volta(vg)}/${n}adults?sort=price_a`;
+    const google = `https://www.google.com/travel/flights?hl=pt-BR&curr=BRL&q=${encodeURIComponent(`voos de São Paulo para ${d.nome.split(' e ')[0]} ida ${vg.ida} volta ${volta(vg)} ${n} adultos`)}`;
+    det = `<div class="grupo" style="margin-top:12px">
+      <div class="item"><span><b>${dataCurta(vg.ida)} → ${dataCurta(volta(vg))}</b><small>${SEMANA[dt(vg.ida).getDay()]} a ${SEMANA[dt(volta(vg)).getDay()]} · ${vg.dur} noites</small></span><span class="dir">${x ? `<b style="font-size:18px">${brl(x[0])}</b><small>por pessoa, ida e volta</small>` : '<small>sem preço</small>'}</span></div>
+      ${x ? `<div class="item"><span>Sai de<small>São Paulo</small></span><span class="dir">${esc(AEROPORTO[x[1]] || x[1])} (${esc(x[1])})</span></div>
+      <div class="item"><span>Companhia</span><span class="dir">${esc(x[3])}</span></div>
+      <div class="item"><span>Paradas</span><span class="dir">${x[2] === 0 ? 'Voo direto' : x[2] === 1 ? '1 parada' : x[2] + ' paradas'}</span></div>
+      <div class="item"><span>Só mala de mão<small>${n} ${n > 1 ? 'pessoas' : 'pessoa'}</small></span><span class="dir">${brl(x[0] * n)}</span></div>
+      <div class="item"><span>Com mala despachada<small>+ cerca de ${brl(mala)} por pessoa (estimativa)</small></span><span class="dir">${brl((x[0] + mala) * n)}</span></div>` : ''}
+    </div>
+    ${vg.exato && vg.durRef !== vg.dur ? `<div class="aviso neutro">Para ${vg.dur} noites o preço exato aparece no site. Acima está o preço de uma viagem de ${vg.durRef} dias saindo no mesmo dia, como referência.</div>` : ''}
+    ${vg.exato && !x ? `<div class="aviso neutro">Sem preço guardado para esse dia. Toque num dia do calendário ou confira no site.</div>` : ''}
+    <div class="acoes"><a class="btn cheio" href="${esc(kayak)}" target="_blank" rel="noopener">Ver no Kayak</a><a class="btn fraco cheio" href="${esc(google)}" target="_blank" rel="noopener">Google Voos</a></div>
+    <div class="acoes" style="margin-top:8px"><button class="btn fraco cheio" onclick="criarAviso('${d.id}')">${I.sino} ${S.alertas[d.id] ? 'Aviso ligado' : 'Avisar se baixar'}</button><button class="btn fraco cheio" onclick="recomendar('${d.id}')">${I.juntos} Mandar pro grupo</button></div>`;
+  }
+  return `<h2>Calendário de preços</h2>
+    <div class="sub" style="margin:-4px 0 8px">Ida e volta por pessoa. Toque num dia para escolher a ida.</div>
+    <div class="chips" style="padding-top:0">${DURS.map(k => `<button class="chip ${dur === k ? 'on' : ''}" onclick="S.dur=${k};S.modo='flex';S.sel=null;salvar();telaDestino('${d.id}',null,true)">${k} dias<small>${minimo(v['d' + k]) ? 'desde ' + brl(minimo(v['d' + k])) : '-'}</small></button>`).join('')}</div>
+    <div class="chips" style="padding-top:2px">${meses.map(m => `<button class="chip ${m === mes ? 'on' : ''}" onclick="S.mesCal='${m}';irMes('${d.id}','${m}',${dur})">${MESES[+m.slice(5) - 1]}<small>${minimo(cal, m) ? brl(minimo(cal, m)) : ''}</small></button>`).join('')}</div>
+    ${meses.length ? calendario(d.id, cal, mes, dur, vg.ida) : '<div class="vazio">Sem preços guardados ainda.</div>'}
+    ${det}
+    ${historicoHtml(d.id)}`;
+}
+const minimo = (cal, mes) => { const ps = Object.entries(cal || {}).filter(([k]) => !mes || k.startsWith(mes)).map(([, x]) => x[0]); return ps.length ? Math.min(...ps) : null; };
+function irMes(id, m, dur) {
+  const cal = VOOS.get(id)['d' + dur] || {};
+  const dias = Object.entries(cal).filter(([k]) => k.startsWith(m));
+  if (dias.length) { const [ida] = dias.reduce((a, b) => b[1][0] < a[1][0] ? b : a); S.sel = { dest: id, ida, dur }; }
+  salvar(); telaDestino(id, null, true);
+}
+function calendario(id, cal, mes, dur, sel) {
+  const [a, m] = mes.split('-').map(Number);
+  const primeiro = new Date(a, m - 1, 1), ultimo = new Date(a, m, 0).getDate();
+  const ps = Object.entries(cal).filter(([k]) => k.startsWith(mes)).map(([, x]) => x[0]).sort((x, y) => x - y);
+  const barato = ps.length ? ps[Math.floor(ps.length * 0.25)] : 0;
+  let html = '<div class="dias">' + '<div class="dia vazio"></div>'.repeat(primeiro.getDay());
+  for (let dia = 1; dia <= ultimo; dia++) {
+    const k = `${mes}-${String(dia).padStart(2, '0')}`;
+    const x = cal[k];
+    const cls = !x ? 'sem-preco' : k === sel ? 'on' : x[0] <= barato ? 'n1' : '';
+    html += `<button class="dia ${cls}" ${x ? `onclick="S.sel={dest:'${id}',ida:'${k}',dur:${dur}};salvar();telaDestino('${id}',null,true)"` : 'disabled'}><b>${dia}</b><span>${x ? (x[0] >= 10000 ? (x[0] / 1000).toFixed(1).replace('.', ',') + ' mil' : x[0].toLocaleString('pt-BR')) : ''}</span></button>`;
+  }
+  return `<div class="cal"><div class="sem">${SEMANA.map(s => `<span>${s}</span>`).join('')}</div>${html}</div></div>
+    <div class="legenda"><span><i style="background:var(--verdeFraco)"></i>mais baratos do mês</span><span><i style="background:var(--verde)"></i>escolhido</span></div>`;
+}
+function historicoHtml(id) {
+  historico().then(h => {
+    const l = h[id] || [];
+    const el = document.getElementById('hist');
+    if (!el) return;
+    if (l.length < 2) { el.innerHTML = `<div class="sub">O histórico do menor preço começa a aparecer a partir da próxima atualização.</div>`; return; }
+    const W = 320, H = 90, ps = l.map(x => x[1]), mn = Math.min(...ps), mx = Math.max(...ps), r = mx - mn || 1;
+    const pts = l.map(([, p], i) => `${(i / (l.length - 1)) * (W - 8) + 4},${H - 10 - ((p - mn) / r) * (H - 24)}`).join(' ');
+    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="width:100%;height:90px;display:block"><polyline points="${pts}" fill="none" stroke="var(--verde)" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg>
+      <div class="linha sub"><span>${dataCurta(l[0][0])}</span><span>menor ${brl(mn)} · maior ${brl(mx)}</span><span>${dataCurta(l[l.length - 1][0])}</span></div>`;
+  });
+  return `<h2>Menor preço ao longo dos dias</h2><div class="texto" id="hist"><div class="sub">Carregando…</div></div>`;
+}
+
+// ---------- hospedagem ----------
+function listaHosp(id) {
+  const h = HOSP.destinos[id] || {};
+  const l = [...(h.hoteis || []).map(x => ({ ...x, fonte: 'hotel' })), ...(h.airbnb || []).map(x => ({ ...x, fonte: 'airbnb' }))];
+  // custo-benefício: metade nota (de 3,5 a 5) e metade preço (comparado com o preço do meio da cidade)
+  const ps = l.map(x => x.p).sort((a, b) => a - b), med = ps[Math.floor(ps.length / 2)] || 1;
+  for (const x of l) {
+    // hostel costuma mostrar o preço de uma cama no quarto coletivo: não entra na disputa de custo-benefício
+    x.hostel = /hostel|albergue|hostal/i.test(x.n) || x.p < med * 0.3;
+    const nota = x.nota ? Math.max(0, Math.min(1, (x.nota - 3.5) / 1.5)) : 0.4;
+    const confia = x.av ? Math.min(1, x.av / 40) : 0.5;
+    const preco = Math.max(0, Math.min(1, med / x.p / 2));
+    x.cb = Math.round((nota * (0.6 + 0.4 * confia) * 50) + preco * 50) - (x.hostel ? 30 : 0);
+  }
+  return l;
+}
+function melhorHosp(id) {
+  const l = listaHosp(id).filter(x => (x.nota || 0) >= 4 && !x.hostel);
+  return l.sort((a, b) => b.cb - a.cb)[0] || null;
+}
+const FAIXAS = [['', 'Qualquer preço'], ['0-250', 'Até R$ 250'], ['250-600', 'R$ 250 a 600'], ['600-99999', 'Acima de R$ 600']];
+function parteHosp(d, vg) {
+  const f = S.hosp;
+  let l = listaHosp(d.id);
+  const melhor = melhorHosp(d.id);
+  if (f.tipo !== 'tudo') l = l.filter(x => x.fonte === f.tipo);
+  if (f.faixa) { const [a, b] = f.faixa.split('-').map(Number); l = l.filter(x => x.p >= a && x.p <= b); }
+  l.sort({ cb: (a, b) => b.cb - a.cb, menor: (a, b) => a.p - b.p, nota: (a, b) => (b.nota || 0) - (a.nota || 0) || b.av - a.av }[f.ordem]);
+  const ent = vg.ida || HOSP.entrada, sai = vg.ida ? volta(vg) : HOSP.saida;
+  const noites = difDias(ent, sai);
+  const n = S.pessoas, quartos = Math.ceil(n / 2);
+  const local = d.airbnb.replace(/--/g, ', ').replace(/-/g, ' ');
+  const maisAirbnb = `https://www.airbnb.com.br/s/${d.airbnb}/homes?checkin=${ent}&checkout=${sai}&adults=${n}`;
+  const maisHotel = `https://www.google.com/travel/search?q=${encodeURIComponent('hotéis em ' + local)}&hl=pt-BR&gl=br&curr=BRL&checkin=${ent}&checkout=${sai}&adults=${Math.min(n, 2)}&rooms=${quartos}`;
+  const cartao = x => {
+    const total = x.p * noites * (x.fonte === 'hotel' ? quartos : 1);
+    const url = x.fonte === 'airbnb' ? `https://www.airbnb.com.br/rooms/${x.id}?check_in=${ent}&check_out=${sai}&adults=${n}` : (x.url ? x.url.replace(/&adults=\d+/, '') + `&checkin=${ent}&checkout=${sai}&adults=${Math.min(n, 2)}` : maisHotel);
+    const k = chaveHosp(x), on = !!S.curtHosp[k];
+    return `<a class="hosp" href="${esc(url)}" target="_blank" rel="noopener" style="position:relative">
+      <div class="foto">${x.img ? `<img loading="lazy" src="${esc(x.img)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}</div>
+      <button class="coracao ${on ? 'on' : ''}" aria-label="Curtir" onclick="event.preventDefault();event.stopPropagation();curtirHosp('${d.id}',${esc(JSON.stringify(k))},this)">${on ? I.coracaoCheio : I.coracao}</button>
+      <div class="info">
+        <span class="tag ${x.fonte === 'airbnb' ? 'laranja' : ''}">${x.fonte === 'airbnb' ? 'Airbnb' : 'Hotel'}</span>${melhor && x.n === melhor.n ? '<span class="tag verde">Melhor custo-benefício</span>' : ''}${x.hostel ? '<span class="tag">Hostel: preço pode ser por cama</span>' : ''}${x.fav ? '<span class="tag">Preferido dos hóspedes</span>' : ''}${x.off ? `<span class="tag verde">${x.off}% abaixo da média</span>` : ''}
+        <div class="n">${esc(x.n)}</div>
+        <div class="det">${[x.nota ? `★ ${x.nota.toLocaleString('pt-BR')}${x.av ? ` (${x.av.toLocaleString('pt-BR')})` : ''}` : 'sem avaliações', x.tipo && x.fonte === 'airbnb' ? x.tipo : '', x.camas, x.est ? x.est + ' estrelas' : ''].filter(Boolean).map(esc).join(' · ')}</div>
+        <div class="pr"><span class="sub">${brl(x.p)} por noite${x.antes ? ` <s>${brl(x.antes)}</s>` : ''}<br>custo-benefício ${x.cb}/100</span><span style="text-align:right"><b>${brl(total)}</b><div class="sub">${noites} noites${x.fonte === 'hotel' && quartos > 1 ? ` · ${quartos} quartos` : ''}</div></span></div>
+      </div></a>`;
+  };
+  return `<div class="chips"><button class="chip ${f.tipo === 'tudo' ? 'on' : ''}" onclick="S.hosp.tipo='tudo';salvar();telaDestino('${d.id}',null,true)">Hotel e Airbnb</button><button class="chip ${f.tipo === 'hotel' ? 'on' : ''}" onclick="S.hosp.tipo='hotel';salvar();telaDestino('${d.id}',null,true)">Só hotel</button><button class="chip ${f.tipo === 'airbnb' ? 'on' : ''}" onclick="S.hosp.tipo='airbnb';salvar();telaDestino('${d.id}',null,true)">Só Airbnb</button></div>
+    <div class="chips" style="padding-top:2px">${FAIXAS.map(([v, nm]) => `<button class="chip ${f.faixa === v ? 'on' : ''}" onclick="S.hosp.faixa='${v}';salvar();telaDestino('${d.id}',null,true)">${nm}</button>`).join('')}</div>
+    <div class="linha" style="margin-top:8px"><span class="sub">${l.length} opções · preço por noite com taxas</span>
+      <select class="ordem" onchange="S.hosp.ordem=this.value;salvar();telaDestino('${d.id}',null,true)">${[['cb', 'Custo-benefício'], ['menor', 'Menor preço'], ['nota', 'Melhor nota']].map(([v, nm]) => `<option value="${v}" ${f.ordem === v ? 'selected' : ''}>${nm}</option>`).join('')}</select></div>
+    <div class="aviso neutro">Preços pesquisados para ${dataCurta(HOSP.entrada || ent)} a ${dataCurta(HOSP.saida || sai)} (2 adultos). Para ${dataCurta(ent)} a ${dataCurta(sai)} e ${n} ${n > 1 ? 'pessoas' : 'pessoa'}, o total é uma estimativa: ao tocar, o site abre já com as suas datas.${n > 2 ? ` Hotel: ${quartos} quartos. Airbnb: veja se cabem ${n} pessoas.` : ''}</div>
+    ${l.length ? l.map(cartao).join('') : '<div class="vazio">Nenhuma opção nessa faixa.</div>'}
+    <div class="acoes"><a class="btn fraco cheio" href="${esc(maisHotel)}" target="_blank" rel="noopener">Mais hotéis</a><a class="btn fraco cheio" href="${esc(maisAirbnb)}" target="_blank" rel="noopener">Mais no Airbnb</a></div>`;
+}
+
+// ---------- lugares ----------
+const TIPO = { praia: 'Praia', natureza: 'Natureza', museu: 'Museu', monumento: 'Monumento', bairro: 'Bairro', passeio: 'Passeio' };
+function parteLugares(d) {
+  const meus = S.quero[d.id] || [];
+  const tipos = [...new Set(d.lugares.map(l => l[1]))];
+  const f = S.tipoLugar && tipos.includes(S.tipoLugar) ? S.tipoLugar : '';
+  const cidade = d.nome.split(' e ')[0];
+  const l = d.lugares.filter(x => !f || x[1] === f);
+  return `<div class="chips"><button class="chip ${!f ? 'on' : ''}" onclick="S.tipoLugar='';salvar();telaDestino('${d.id}',null,true)">Todos</button>${tipos.map(t => `<button class="chip ${f === t ? 'on' : ''}" onclick="S.tipoLugar='${t}';salvar();telaDestino('${d.id}',null,true)">${TIPO[t]}</button>`).join('')}</div>
+    ${meus.length ? `<div class="aviso">Você quer ir em ${meus.length} ${meus.length > 1 ? 'lugares' : 'lugar'}: ${meus.map(esc).join(', ')}. <a href="https://www.google.com/maps/dir/${meus.map(m => encodeURIComponent(m + ', ' + cidade)).join('/')}" target="_blank" rel="noopener">Ver no mapa</a></div>` : ''}
+    ${l.map(([nome, tipo], i) => {
+      const w = LUG[nome] || {};
+      const on = meus.includes(nome);
+      return `<div class="lugar" id="lg${i}">
+        <div class="foto">${w.img ? `<img loading="lazy" src="${esc(w.img)}" alt="" onerror="this.remove()">` : ''}</div>
+        <div style="flex:1;min-width:0">
+          <div class="sub">${TIPO[tipo] || ''}</div>
+          <div class="n">${esc(nome.replace(/ \([^)]*\)$/, ''))}</div>
+          <div class="t" onclick="this.parentElement.parentElement.classList.toggle('aberto')">${esc(w.txt || '')}</div>
+          <div class="bts">
+            <button class="quero ${on ? 'on' : ''}" onclick="quero('${d.id}',${JSON.stringify(nome).replace(/"/g, '&quot;')})">${on ? '✓ Quero ir' : '+ Quero ir'}</button>
+            <a href="https://www.google.com/maps/search/${encodeURIComponent(nome.replace(/ \([^)]*\)$/, '') + ', ' + cidade)}" target="_blank" rel="noopener">Mapa</a>
+            ${w.url ? `<a href="${esc(w.url)}" target="_blank" rel="noopener">Saber mais</a>` : ''}
+          </div>
+        </div></div>`;
+    }).join('')}
+    <div class="sub" style="margin-top:12px">Fotos e textos: Wikipédia.</div>`;
+}
+function quero(id, nome) {
+  const l = S.quero[id] ||= [];
+  const i = l.indexOf(nome);
+  if (i >= 0) l.splice(i, 1); else l.push(nome);
+  salvar(); telaDestino(id, null, true);
+}
+
+// ---------- avisos de preço ----------
+function criarAviso(id) {
+  const d = DEST.get(id), r = RES[id] || {};
+  if (S.alertas[id]) {
+    if (!confirm(`Desligar o aviso de ${d.nome}?`)) return;
+    delete S.alertas[id]; salvar(); sincronizar(); toast('Aviso desligado');
+    return location.hash.includes('destino=') ? telaDestino(id, null, true) : telaCurtidas();
+  }
+  const sugestao = r.min ? Math.round(r.min * 0.9 / 10) * 10 : '';
+  const v = prompt(`Avisar quando a passagem para ${d.nome} (ida e volta, por pessoa) ficar abaixo de quanto?\nHoje está a partir de ${brl(r.min) || '-'}.`, sugestao);
+  if (v === null) return;
+  const max = parseInt(String(v).replace(/\D/g, ''), 10) || null;
+  S.alertas[id] = { max, base: r.min || null, dur: S.modo === 'exato' ? null : S.dur, mes: S.modo === 'flex' ? S.mes || '' : (S.ida || '').slice(0, 7), em: Date.now() };
+  salvar(); sincronizar();
+  toast(S.push ? 'Aviso ligado: quando baixar, você é notificado' : 'Aviso ligado. Ative as notificações no Perfil.');
+  if (location.hash.includes('destino=')) telaDestino(id, null, true); else telaCurtidas();
+}
+// ---------- perfil ----------
+function telaPerfil() {
+  document.getElementById('app').innerHTML = `<div class="tela"><h1>Perfil</h1>
+    <h2>Aparência</h2>
+    <div class="seg">${[['auto', 'Automático'], ['claro', 'Claro'], ['escuro', 'Escuro']].map(([v, n]) => `<button class="${S.tema === v ? 'on' : ''}" onclick="S.tema='${v}';salvar();aplicarTema();telaPerfil()">${n}</button>`).join('')}</div>
+    <h2>Notificações</h2>
+    <div class="texto">
+      ${S.push ? `<div>Notificações ligadas neste aparelho.</div>` : `<div>Receba aviso quando a passagem para um destino que você quer baixar, e quando alguém do grupo mandar uma viagem.</div>`}
+      <button class="btn cheio" style="width:100%;margin-top:12px" onclick="ativarPush()">${S.push ? 'Mandar notificação de teste' : 'Ativar notificações'}</button>
+      <div class="sub" style="margin-top:10px">No iPhone, funciona com o app adicionado à Tela de Início (Compartilhar → Adicionar à Tela de Início).</div>
+    </div>
+    <h2>Seu nome</h2>
+    <input class="campo" placeholder="Aparece para o seu grupo" value="${esc(S.nome || '')}" onchange="S.nome=this.value.trim().slice(0,20);salvar();sincronizar();toast('Nome salvo')">
+    <h2>Seu canal</h2>
+    <div class="texto"><div class="sub">Código deste aparelho para os avisos. Para receber os mesmos avisos em outro aparelho, digite o mesmo código lá.</div>
+      <input class="campo" style="margin-top:8px;background:var(--card2)" value="${esc(canal())}" onchange="trocarCanal(this.value)"></div>
+    <h2>De onde vêm os preços</h2>
+    <div class="texto" style="font-size:14px">Passagens: Kayak, ida e volta por pessoa, o menor preço entre Guarulhos, Congonhas e Viracopos. Hotéis: Google Hotéis. Casas e apartamentos: Airbnb. Lugares: Wikipédia.
+      <div class="sub" style="margin-top:8px">Os preços mudam o tempo todo: confira no site antes de comprar. Mala despachada é uma estimativa (cerca de ${brl(MALA.brasil)} no Brasil e ${brl(MALA.europa)} em voos longos, ida e volta).</div>
+      <div class="sub" style="margin-top:6px">Atualizado em ${INFO.atualizado ? new Date(INFO.atualizado).toLocaleString('pt-BR') : '-'}.</div></div>
+  </div>`;
+}
+
+async function compartilhar(id) {
+  const d = DEST.get(id), r = RES[id] || {};
+  const url = location.origin + location.pathname + '#destino=' + id;
+  const dados = { title: d.nome, text: `${d.nome}: passagem saindo de São Paulo a partir de ${brl(r.min)} (ida e volta)`, url };
+  try { if (navigator.share) await navigator.share(dados); else { await navigator.clipboard.writeText(dados.text + ' ' + url); toast('Link copiado'); } } catch (e) {}
+}
+
+// ---------- notificações (Web Push) e sincronização ----------
+const SW = 'sw.js?v=1';
+const VAPID = 'BFJFPfqTyruHYyAT0E03jEjXC84kpJasHlfBKjkMNEZdGU85pGveFjJYaa8pfp4qCqVGMNXB0y9rcZrNfRtmY4E';
+const REGISTRO = 'partiu-reg-6bm6xqcdhjmxx5';
+function canal() {
+  if (!S.canal) { S.canal = 'vj-' + Array.from(crypto.getRandomValues(new Uint8Array(9)), b => 'abcdefghijkmnpqrstuvwxyz23456789'[b % 32]).join(''); salvar(); }
+  return S.canal;
+}
+function trocarCanal(v) { v = v.trim(); if (v.length < 8) return toast('Código muito curto'); S.canal = v; salvar(); sincronizar(); toast('Canal trocado'); }
+let _sync;
+function sincronizar() {
+  clearTimeout(_sync);
+  _sync = setTimeout(async () => {
+    const prefs = { em: Date.now(), alertas: S.alertas, curtidas: Object.fromEntries(Object.entries(S.curtidas).map(([k, v]) => [k, v.base])), pushes: S.push ? [S.push] : [], nome: S.nome || '', grupo: S.juntos || '' };
+    try { await fetch('https://ntfy.sh/' + canal() + '-prefs', { method: 'POST', body: JSON.stringify(prefs) }); } catch (e) {}
+  }, 800);
+}
+function b64(s) { const p = '='.repeat((4 - s.length % 4) % 4); const r = atob((s + p).replace(/-/g, '+').replace(/_/g, '/')); return Uint8Array.from(r, c => c.charCodeAt(0)); }
+async function ativarPush() {
+  if (!VAPID || !REGISTRO) return toast('As notificações ficam prontas quando o app for publicado');
+  if (S.push) {
+    try { await fetch('https://ntfy.sh/' + REGISTRO, { method: 'POST', body: JSON.stringify({ canal: canal(), teste: Date.now() }) }); } catch (e) {}
+    return toast('Pedido de teste enviado. A notificação chega na próxima rodada do robô.');
+  }
+  if (!('serviceWorker' in navigator) || !('PushManager' in window)) return toast('Adicione o app à Tela de Início primeiro');
+  try {
+    const reg = await navigator.serviceWorker.register(SW);
+    await navigator.serviceWorker.ready;
+    const perm = await Notification.requestPermission();
+    if (perm !== 'granted') return toast('Notificações não permitidas');
+    const sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64(VAPID) });
+    S.push = sub.toJSON(); salvar();
+    await fetch('https://ntfy.sh/' + REGISTRO, { method: 'POST', body: JSON.stringify({ canal: canal(), em: Date.now() }) });
+    sincronizar(); toast('Notificações ativadas'); telaPerfil();
+  } catch (e) { toast('Não deu para ativar: ' + e.message); }
+}
+
+// ---------- início ----------
+(async () => {
+  document.getElementById('app').innerHTML = `<div class="tela"><h1 style="display:flex;align-items:center;gap:10px"><img src="logo.png" alt="" style="width:38px;height:38px;border-radius:50%;background:#fff">Partiu</h1><div class="grade">${'<div class="esqueleto"></div>'.repeat(4)}</div></div>`;
+  abas();
+  try { await carregar(); } catch (e) { document.getElementById('app').innerHTML = `<div class="tela"><h1 style="display:flex;align-items:center;gap:10px"><img src="logo.png" alt="" style="width:38px;height:38px;border-radius:50%;background:#fff">Partiu</h1><div class="vazio">Não consegui carregar. Verifique a internet.</div></div>`; return; }
+  canal();
+  rota();
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register(SW).then(r => r.update()).catch(() => {});
+  if (S.push && REGISTRO && Date.now() - (S.registrado || 0) > 6 * 3600e3) {
+    try { await fetch('https://ntfy.sh/' + REGISTRO, { method: 'POST', body: JSON.stringify({ canal: canal(), em: Date.now() }) }); S.registrado = Date.now(); salvar(); sincronizar(); } catch (e) {}
+  }
+})();
+</script>
+<script src="juntos.js?v=1795295660"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+name: Publicar site
+
+# quando o app muda (sem ser os preços), publica na hora sem rodar a coleta
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - '!app/data/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: partiu
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.site.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app
+      - id: site
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+      # o GitHub às vezes falha na primeira tentativa ("Fetching artifact metadata failed"): espera e tenta de novo
+      - if: ${{ steps.site.outcome == 'failure' }}
+        run: sleep 60
+      - if: ${{ steps.site.outcome == 'failure' }}
+        uses: actions/deploy-pages@v4

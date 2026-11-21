@@ -1,0 +1,104 @@
+name: Atualizar preços
+
+on:
+  schedule:
+    # 7h, 13h e 19h (horário de Brasília)
+    - cron: '0 10,16,22 * * *'
+  workflow_dispatch:
+    inputs:
+      so_avisos:
+        description: "Só rodar os avisos (sem coletar preços)"
+        type: boolean
+        required: false
+        default: false
+      teste_todos:
+        description: "Mandar notificação de teste para todos os celulares"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: partiu
+  cancel-in-progress: false
+
+env:
+  TZ: America/Sao_Paulo
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.site.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Coletar passagens, hotéis e Airbnb
+        if: ${{ !inputs.so_avisos }}
+        run: ruby coletar.rb
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Recuperar canais e preferências dos celulares
+        uses: actions/cache/restore@v4
+        with:
+          path: .prefs
+          key: prefs-${{ github.run_id }}
+          restore-keys: prefs-
+
+      - name: Instalar o envio de notificações
+        run: npm install --no-save --no-package-lock web-push@3
+
+      - name: Mandar avisos para os celulares
+        env:
+          VAPID_PUBLIC: ${{ vars.VAPID_PUBLIC }}
+          VAPID_PRIVATE: ${{ secrets.VAPID_PRIVATE }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          REGISTRO: ${{ vars.REGISTRO }}
+          TESTE_TODOS: ${{ inputs.teste_todos && '1' || '' }}
+        run: node alertas.js
+
+      - name: Guardar canais e preferências
+        if: ${{ always() }}
+        uses: actions/cache/save@v4
+        with:
+          path: .prefs
+          key: prefs-${{ github.run_id }}
+
+      - name: Salvar os preços novos
+        if: ${{ !inputs.so_avisos }}
+        run: |
+          git config user.name "partiu-bot"
+          git config user.email "partiu-bot@users.noreply.github.com"
+          git add app/data
+          git diff --cached --quiet || git commit -m "Atualiza preços $(date '+%d/%m %H:%M')"
+          git pull --rebase -X theirs --quiet origin main
+          git push
+
+      - name: Preparar o site
+        if: ${{ !cancelled() }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: app
+
+      - name: Publicar no GitHub Pages
+        if: ${{ !cancelled() }}
+        id: site
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+
+      # o GitHub às vezes falha na primeira tentativa ("Fetching artifact metadata failed"): espera e tenta de novo
+      - name: Esperar antes de tentar de novo
+        if: ${{ steps.site.outcome == 'failure' }}
+        run: sleep 60
+
+      - name: Publicar no GitHub Pages (2ª tentativa)
+        if: ${{ steps.site.outcome == 'failure' }}
+        uses: actions/deploy-pages@v4
