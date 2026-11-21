@@ -210,7 +210,9 @@ def pagina_vazia(fonte, html)
   VAZIAS[fonte] += 1
   return if VAZIAS[fonte] > 2
   titulo = html[/<title[^>]*>([^<]*)/, 1].to_s.strip[0, 80]
-  warn "  #{fonte} sem resultados: \"#{titulo}\" #{html.bytesize} bytes · #{html.gsub(/<[^>]+>/, ' ').gsub(/\s+/, ' ')[0, 160]}"
+  warn "  #{fonte} sem resultados: \"#{titulo}\" #{html.bytesize} bytes · cartões JC21ye: #{html.scan('jsmodel="JC21ye"').size} · rótulos: #{html.scan(/aria-label="[^"]{0,25}/).map { |x| x[12..-1] }.uniq.first(25).join(' | ')}"
+  i = html.index(/R\$|BRL|US\$|\$\d/)
+  warn "    perto do primeiro preço: #{html[[i.to_i - 300, 0].max, 600].gsub(/\s+/, ' ')}" if i
 end
 
 def google_voos(para, ida, volta)
