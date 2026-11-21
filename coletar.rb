@@ -204,6 +204,23 @@ end
 
 AEROPORTO_SP = { 'Guarulhos' => 'GRU', 'Congonhas' => 'CGH', 'Viracopos' => 'VCP' }.freeze
 
+# Do servidor do robô (nos EUA) o Google mostra os preços em dólar: converte pela cotação do dia.
+def cotacao_dolar
+  @cotacao ||= begin
+    j = JSON.parse(baixar('https://api.frankfurter.dev/v1/latest?base=USD&symbols=BRL') || '{}')
+    j.dig('rates', 'BRL') || 5.9
+  rescue StandardError
+    5.9
+  end
+end
+
+# "1.234" ou "1,234" (milhar) -> 1234; em dólar, converte para reais
+def preco_em_reais(texto, moeda)
+  return nil if texto.nil? || moeda.nil?
+  n = texto.gsub(/[.,](\d{3})(?!\d)/, '\1').tr(',', '.').to_f
+  (moeda == 'USD' ? n * cotacao_dolar : n).round
+end
+
 # quando a página volta sem resultados, registra o que veio (título e tamanho) para entender o bloqueio
 VAZIAS = Hash.new(0)
 def pagina_vazia(fonte, html)
@@ -227,7 +244,7 @@ def google_voos(para, ida, volta)
     saida = l[/Sai do aeroporto (.+?) às/, 1].to_s
     {
       'c' => cia,
-      'p' => l[/a partir de ([\d\.]+) Reais/, 1].to_s.delete('.').to_i,
+      'p' => preco_em_reais(l[/a partir de ([\d\.,]+) /, 1], l =~ /Reais brasileiros/ ? 'BRL' : l =~ /D[óo]lares americanos/ ? 'USD' : nil),
       's' => l =~ /sem escalas|Voos? direto/i ? 0 : l[/com (\d+) parada/, 1].to_i,
       'o' => (AEROPORTO_SP.find { |k, _| saida.include?(k) } || [])[1],
       'h' => l[/às (\d{1,2}:\d{2})/, 1],
@@ -306,13 +323,14 @@ def hoteis_google(d, ent, sai)
   return [] unless html
   cartoes = html.split(/<div[^>]*jsmodel="JC21ye"/)[1..-1].to_a.map do |c|
     nome = CGI.unescapeHTML(c[/<h2[^>]*>([^<]+)<\/h2>/, 1].to_s)
-    preco = c[/Preços a partir de R\$[[:space:]]*([\d\.]+)/, 1]
-    next if nome.empty? || !preco
+    moeda, valor = c.match(/Preços a partir de (R\$|US\$)[[:space:]]*([\d\.,]+)/).to_a[1..2]
+    preco = preco_em_reais(valor, moeda == 'US$' ? 'USD' : 'BRL')
+    next if nome.empty? || !preco || preco <= 0
     ent_link = c[/href="(\/travel\/hotels\/entity\/[^"?]+)/, 1]
     nota = c[/(\d,\d) de 5/, 1]
     {
       'n' => nome,
-      'p' => preco.delete('.').to_i, # por noite
+      'p' => preco, # por noite, em reais
       'nota' => nota && nota.tr(',', '.').to_f,
       'av' => (c[/de 5 estrelas em ([\d\.]+) avalia/, 1] || '').delete('.').to_i,
       'est' => c[/Hotel (\d) estrelas/, 1].to_i,
