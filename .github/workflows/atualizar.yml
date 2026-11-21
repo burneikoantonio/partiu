@@ -11,6 +11,11 @@ on:
         type: boolean
         required: false
         default: false
+      so:
+        description: "Rodar só uma parte da coleta (voos, hoteis ou lugares); vazio = tudo"
+        type: string
+        required: false
+        default: ""
       teste_todos:
         description: "Mandar notificação de teste para todos os celulares"
         type: boolean
@@ -40,6 +45,8 @@ jobs:
 
       - name: Coletar passagens, hotéis e Airbnb
         if: ${{ !inputs.so_avisos }}
+        env:
+          SO: ${{ inputs.so }}
         run: ruby coletar.rb
 
       - uses: actions/setup-node@v4

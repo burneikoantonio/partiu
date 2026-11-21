@@ -27,7 +27,7 @@ Dir.mkdir(File.join(DADOS, 'voos')) unless Dir.exist?(File.join(DADOS, 'voos'))
 CFG = JSON.parse(File.read(File.join(DIR, 'app/destinos.json'), encoding: 'UTF-8'))
 DEST = CFG['destinos']
 RAPIDO = ENV['RAPIDO'] == '1'
-SO = ENV['SO']
+SO = ENV['SO'].to_s.strip.empty? ? nil : ENV['SO'].strip
 UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36'
 HOJE = Date.today
 AGORA = Time.now
@@ -204,6 +204,15 @@ end
 
 AEROPORTO_SP = { 'Guarulhos' => 'GRU', 'Congonhas' => 'CGH', 'Viracopos' => 'VCP' }.freeze
 
+# quando a página volta sem resultados, registra o que veio (título e tamanho) para entender o bloqueio
+VAZIAS = Hash.new(0)
+def pagina_vazia(fonte, html)
+  VAZIAS[fonte] += 1
+  return if VAZIAS[fonte] > 2
+  titulo = html[/<title[^>]*>([^<]*)/, 1].to_s.strip[0, 80]
+  warn "  #{fonte} sem resultados: \"#{titulo}\" #{html.bytesize} bytes · #{html.gsub(/<[^>]+>/, ' ').gsub(/\s+/, ' ')[0, 160]}"
+end
+
 def google_voos(para, ida, volta)
   url = "https://www.google.com/travel/flights/search?tfs=#{google_voos_tfs('SAO', para, ida, volta)}&hl=pt-BR&gl=br&curr=BRL"
   html = baixar(url, tentativas: 2)
@@ -222,6 +231,7 @@ def google_voos(para, ida, volta)
       'd' => l[/Duração total: ([^.]+)\./, 1]
     }.reject { |_, v| v.nil? }
   end.compact.select { |v| v['p'] > 0 }
+  pagina_vazia('Google Voos', html) if voos.empty?
   # por companhia: o voo mais barato e, se ele tiver parada, também o direto mais barato
   voos.group_by { |v| v['c'] }.map do |_, l|
     melhor = l.min_by { |v| v['p'] }
@@ -308,7 +318,9 @@ def hoteis_google(d, ent, sai)
       'url' => ent_link ? "https://www.google.com#{ent_link}?hl=pt-BR&gl=br&curr=BRL&adults=2" : nil
     }.reject { |_, v| v.nil? || v == 0 }
   end
-  cartoes.compact.uniq { |h| h['n'] }.first(20)
+  r = cartoes.compact.uniq { |h| h['n'] }.first(20)
+  pagina_vazia('Google Hotéis', html) if r.empty?
+  r
 end
 
 def achar(o, chave, acc = [])
